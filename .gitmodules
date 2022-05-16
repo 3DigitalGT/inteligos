@@ -1,0 +1,4 @@
+[submodule "addons_gen"]
+	path = addons_gen
+	url = git@github.com:3DigitalGT/addons_gen.git
+	branch = release/15.0
