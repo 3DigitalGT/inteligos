@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+
+        <record model="ir.module.category" id="module_category_account_journal_closing">
+            <field name="name">Cierre de caja</field>
+            <field name="description">Permisos para el modulo de cierre de caja</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record id="group_account_journal_closing_manager" model="res.groups">
+            <field name="name">Cierre de caja / Manager</field>
+            <field name="category_id" ref="module_category_account_journal_closing"/>
+        </record>
+
+    </data>
+</odoo>

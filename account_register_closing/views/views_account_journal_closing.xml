@@ -1,0 +1,140 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="account_journal_clousing_list">
+            <field name="name">Vista Lista de Cierre  de Diario</field>
+            <field name="model">account.journal.closing</field>
+            <field name="arch" type="xml">
+                <tree name="tree_account_journal_clousing_list"  delete="false">
+                    <field name="can_delete" invisible="1"/>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                    <field name="account_journals_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_journal_clousing_search">
+            <field name="name">vista Search de account journal clousing</field>
+            <field name="model">account.journal.closing</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="user_id"/>
+                    <field name="account_journals_id"/>
+                    <field name="date_start"/>
+                    <field name="date_end"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="account_journal_clousing_form">
+            <field name="name">Vista Form cierre de diario</field>
+            <field name="model">account.journal.closing</field>
+            <field name="arch" type="xml">
+                <form string="Cierre de Diario" name="form_data" delete="false">
+                    <header>
+                        <button name="calculate_movements2" type="object" string="Calcular Movimientos" class="oe_highlight" attrs="{'invisible': [('state','in', ('confirmed', 'cancelled'))]}"/>
+                        <button name="confirm_state" type="object" string="Confirmar" class="oe_highlight"  attrs="{'invisible': [('state','in', ('confirmed', 'cancelled'))]}"/>
+                        <button name="open_wizard_suppliers" type="object" string="Crear facturas de proveedores" attrs="{'invisible': [('state','=','confirmed')]}"/>
+                        <button name="open_wizard_payment" type="object" string="Crear Pago" attrs="{'invisible': [('state','=','confirmed')]}"/>
+                        <button name="send_email" type="object" string="Enviar"/>
+                        <button name="draft_state" type="object" string="Borrador" attrs="{'invisible': [('state','in',('draft', 'confirmed'))]}"/>
+                        <button name="cancel_state" type="object" string="Cancelar" attrs="{'invisible': [('state','in',('cancelled', 'draft'))]}"/>
+                        <button name="invoice_report" type="object" string="Reporte Facturas" class="oe_highlight"/>
+                        <field name="state" widget="statusbar" readonly="1"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_payments" class="oe_stat_button" icon="fa-pencil-square-o">
+                                <field name="payments_ids" widget="statinfo" string="Pagos"/>
+                            </button>
+                            <button type="object" name="action_view_invoice" class="oe_stat_button" icon="fa-bars">
+                                <field name="invoice_count" widget="statinfo" string="Facturas"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="user_id" attrs="{'readonly': [('state','=','confirmed')]}"/>
+                                <field name="date_start" readonly="0" attrs="{'readonly': [('state','=','confirmed')]}"/>
+
+                            </group>
+
+                            <group>
+                                <field name="account_journals_id" attrs="{'readonly': [('state','=','confirmed')]}"/>
+                                <field name="date_end" readonly="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Saldos" name="account_balances">
+                                <field name="account_journal_balance_ids" widget="one2many_list" attrs="{'readonly': [('state','=','confirmed')]}">
+                                    <tree editable="bottom" string="Saldos">
+                                        <field name="payment_method"/>
+                                        <field name="initial_balance"/>
+                                        <field name="payments_entry"/>
+                                        <field name="outgoing_payments"/>
+                                        <field name="final_balance"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Movimientos" name="account_movements">
+                                <field name="account_payments_ids" attrs="{'readonly': [('state','=','confirmed')]}"/>
+                            </page>
+                            <page string="Facturas" name="account_movements">
+                                <field name="account_move_ids_button" widget="one2many_list" attrs="{'readonly': [('state','=','confirmed')]}">
+                                    <tree editable="bottom" string="Saldos">
+                                        <field name="name"/>
+                                        <field name="partner_id" />
+                                        <field name="invoice_date" optional="show" invisible="context.get('default_type') not in ('in_invoice', 'in_refund','in_receipt')" string="Bill Date"/>
+                                        <field name="invoice_date" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Invoice Date"/>
+                                        <field name="invoice_origin" optional="show" string="Source Document" invisible="1"/>
+                                        <field name="payment_reference" optional="hide" invisible="context.get('default_type') in ('out_invoice', 'out_refund','out_receipt')"/>
+                                        <field name="ref" />
+                                        <field name="invoice_user_id" optional="show" invisible="context.get('default_type') not in ('out_invoice', 'out_refund','out_receipt')" string="Sales Person"/>
+                                        <field name="company_id" groups="base.group_multi_company" options="{'no_create': True}" optional="show" invisible="1"/>
+                                        <field name="invoice_date_due" optional="hide" />
+<!--                                        <field name="amount_untaxed_signed" string="Impuestos Excluidos" sum="Total" optional="show"/>-->
+<!--                                        <field name="amount_tax_signed" string="Impuestos" sum="Total" optional="show"/>-->
+                                        <field name="amount_total_signed" string="Total" sum="Total" optional="show"/>
+                                        <field name="amount_residual_signed" string="Amount Due" sum="Amount Due" optional="hide"/>
+                                        <field name="currency_id" invisible="1"/>
+                                        <field name="company_currency_id" invisible="1"/>
+                                        <field name="state" optional="show"/>
+                                        <field name="payment_state" optional="hide"/>
+                                        <field name="move_type" invisible="context.get('default_type', True)"/>
+                                    </tree>
+                                </field>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_form_account_journal_clousing">
+            <field name="name">Accion vista lista cierre de diario</field>
+            <field name="res_model">account.journal.closing</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem name="Asesor" id="account_register_closing.menu_asesor" parent="account.menu_finance_entries" sequence="12"/>
+
+        <menuitem name="Cierre de Caja" id="account_register_closing.menu_form" parent="account_register_closing.menu_asesor"
+                  action="action_form_account_journal_clousing"/>
+    </data>
+</odoo>

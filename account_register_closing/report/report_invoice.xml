@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <report id="report_invoice_journal_closing"
+                string="Reporte Facturas Cierre de Caja"
+                model="account.journal.closing"
+                report_type="qweb-pdf"
+                name="account_register_closing.invoice_report_closing"
+                file="account_register_closing.invoice_report_closing"
+        />
+
+        <template id="invoice_report_closing">
+            <t t-call="web.html_container">
+                <t t-call="web.layout" t-lang="lang">
+                    <div style="position:absolute;top:5px;left:10px;height:10%;width:100%">
+                        <strong style="font-size:12px"><t t-esc="company"/></strong>
+                        <br> </br>
+                        <strong style="font-size:12px">Liquidacion de caja chica No. <t t-esc="name"/> </strong>
+                        <br> </br>
+                        <strong style="font-size:12px">Fecha <t t-esc="date"/> </strong>
+                        <br> </br>
+                        <strong style="font-size:12px;position:relative;left:580px;top:-20px">Saldo inicial en efectivo:  <t t-esc="initial_cash_balance"/> </strong>
+                        <br> </br>
+                        <strong style="font-size:12px">Fecha <t t-esc="documents_date"/> </strong>
+
+                    </div>
+                    <br> </br>
+                    <br> </br>
+                    <br> </br>
+                    <br> </br>
+                    <br> </br>
+                    <div>
+                        <table>
+                            <thead>
+                                <tr style="border: 1px solid black;">
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Fecha Doc</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Descripción del gasto</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Serie</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">No.documento</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Proveedores</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Valor Neto</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">IVA</th>
+                                    <th name="th_description" style="width:13%;font-size:12px;border: 1px solid black;">Total</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size:12px;">
+                                <t t-foreach="invoices" t-as="v">
+                                    <tr style="border: 1px solid black;">
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: right;"> <t t-esc="v_value['document_date']"/></td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: left;"><t t-esc="v_value['desc']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: left;"><t t-esc="v_value['serie']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: right;"><t t-esc="v_value['no_document']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: left;"><t t-esc="v_value['vendor']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: right;"><t t-esc="v_value['net_value']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: right;"><t t-esc="v_value['tax']"/> </td>
+                                        <td name="td_initial balance" style="border: 1px solid black;font-size:12px;text-align: right;"><t t-esc="v_value['total']"/> </td>
+                                    </tr>
+                                </t>
+                                <tr >
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                </tr>
+                                <tr >
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"><strong>Total </strong> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> <t t-esc="net_total"/></td>
+                                    <td name="td_initial balance" style="font-size:12px;"> <t t-esc="tax_total"/></td>
+                                    <td name="td_initial balance" style="font-size:12px;"> <t t-esc="total"/></td>
+                                </tr>
+                                <tr >
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                </tr>
+                                <tr style="border: 1px solid black;">
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"><strong>Saldo en Efectivo </strong> </td>
+                                    <td name="td_initial balance" style="font-size:12px;">  <t t-esc="end_cash_balance"/></td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                </tr>
+                                <br> </br>
+                                <tr >
+                                    <td name="td_initial balance" style="font-size:12px;"> <strong>Numero de documentos</strong></td>
+                                    <td name="td_initial balance" style="font-size:12px;text-align: right;"><t t-esc="documents_number"/> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"><strong>Elaborado por: </strong> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"><t t-esc="log_user"/> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"><strong>Reviso: </strong> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                    <td name="td_initial balance" style="font-size:12px;"> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br/>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

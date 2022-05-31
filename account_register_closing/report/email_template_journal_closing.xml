@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+      <record id="email_template_journal_closing" model="mail.template">
+        <field name="name">Email Template Cierre de caja</field>
+        <field name="model_id" ref="account_register_closing.model_account_journal_closing"/>
+        <field name="auto_delete" eval="True"/>
+        <field name="email_from">${(object.user_id.email_formatted or user.email_formatted) | safe}</field>
+        <field name="email_to"></field>
+        <field name="report_template" ref="report_account_journal_closing"/>
+        <field name="subject">${object.name}</field>
+        <field name="body_html"><![CDATA[
+        <p>Cierre de Caja de ${(object.date_start)} a ${(object.date_end)}
+        </p>]]>
+      </field>
+      </record>
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_account_journal_closing" model="ir.sequence">
+           <field name="name">Secuencia de Cierre de Caja</field>
+           <field name="code">account.journal.closing.sequence</field>
+           <field name="active">TRUE</field>
+           <field name="prefix">AJC</field>
+           <field name="padding">6</field>
+           <field name="number_next">1</field>
+           <field name="number_increment">1</field>
+           <field name="implementation">no_gap</field>
+           <field name="company_id"></field>
+        </record>
+    </data>
+</odoo>

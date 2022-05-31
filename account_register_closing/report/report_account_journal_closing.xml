@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!-- QWeb Reports ACTION-->
+        <record id="report_account_journal_closing" model="ir.actions.report">
+            <field name="model">account.journal.closing</field>
+            <field name="name">Cierre de Caja</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">account_register_closing.account_journal_closing</field>
+            <field name="report_file">account_register_closing.account_journal_closing</field>
+        </record>
+        <template id="account_register_closing.account_journal_closing">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <h1><span t-field="o.name"/></h1>
+                            <h6>Cierre de Caja</h6>
+
+                            <div class="row mt32 mb32" id="informations">
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Diario:</strong>
+                                    <p class="m-0" t-field="o.account_journals_id.name"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Usuario:</strong>
+                                    <p class="m-0" t-field="o.user_id.name"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2">
+                                    <strong>Fecha Inicial:</strong>
+                                    <p class="m-0" t-field="o.date_start" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                </div>
+                                <div class="col-auto mw-100 mb-2" name="expiration_date">
+                                    <strong>Fecha Final:</strong>
+                                    <p class="m-0" t-field="o.date_end" t-options="{&quot;widget&quot;: &quot;date&quot;}"/>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <strong><h6>Saldos</h6></strong>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th name="th_description" class="text-left">Tipo</th>
+                                        <th name="th_description" class="text-left">Saldo Inicial</th>
+                                        <th name="th_description" class="text-left">Ingresos</th>
+                                        <th name="th_description" class="text-left">Egresos</th>
+                                        <th name="th_description" class="text-left">Saldo Final</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size:12px">
+                                    <t t-foreach="o.account_journal_balance_ids" t-as="line">
+                                        <tr>
+                                            <td name="th_description" class="text-left"><span t-field="line.payment_method"/></td>
+                                            <td name="th_description" class="text-left"><span t-field="line.initial_balance"/></td>
+                                            <td name="th_description" class="text-left"><span t-field="line.payments_entry"/></td>
+                                            <td name="th_description" class="text-left"><span t-field="line.outgoing_payments"/></td>
+                                            <td name="th_description" class="text-left"><span t-field="line.final_balance"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <br/>
+
+                            <strong><h6>Movimientos</h6></strong>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th name="th_description" class="text-left">Referencia</th>
+                                        <th name="th_description" class="text-left">Fecha</th>
+                                        <th name="th_description" class="text-left">Cliente</th>
+                                        <th name="th_description" class="text-left">Forma de pago</th>
+                                        <th name="th_description" class="text-left">Monto</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size:12px">
+                                    <t t-foreach="o.account_payments_ids" t-as="line" >
+                                        <tr>
+                                            <td name="td_method"><span t-field="line.name"/></td>
+                                            <td name="td_initial balance"><span t-field="line.payment_date"/></td>
+                                            <td name="td_initial balance"><span t-field="line.partner_id.name"/></td>
+                                            <td name="td_initial balance"><span t-field="line.method"/></td>
+                                            <td name="td_initial balance"><span t-field="line.amount"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                            <br/>
+
+                            <strong><h6>Apuntes Contables</h6></strong>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th name="th_description" class="text-left">Nombre</th>
+                                        <th name="th_description" class="text-left">Fecha</th>
+                                        <th name="th_description" class="text-left">Descripción</th>
+                                        <th name="th_description" class="text-left">Serie</th>
+                                        <th name="th_description" class="text-left">Numero</th>
+                                        <th name="th_description" class="text-left">Proveedor</th>
+                                        <!--                                        <th name="th_description" class="text-left">Valor Neto</th>-->
+                                        <!--                                        <th name="th_description" class="text-left">IVA</th>-->
+                                        <th name="th_description" class="text-left">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody style="font-size:12px">
+                                    <t t-foreach="o.account_move_ids" t-as="line" >
+                                        <tr>
+                                            <td name="td_method"><span t-field="line.name"/></td>
+                                            <td name="td_initial balance"><span t-field="line.date"/></td>
+                                            <td name="td_initial balance"><span t-field="line.ref"/></td>
+                                            <td name="td_initial balance"><span t-field="line.invoice_doc_serie"/></td>
+                                            <td name="td_initial balance"><span t-field="line.invoice_doc_number"/></td>
+                                            <td name="td_initial balance"><span t-field="line.partner_id.name"/></td>
+                                            <!--                                            <td name="td_initial balance"><span t-field="line.price_subtotal"/></td>-->
+                                            <!--                                            <td name="td_initial balance"><span t-field="line.amount_by_group"/></td>-->
+                                            <td name="td_initial balance"><span t-field="line.amount_total"/></td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
