@@ -1,0 +1,82 @@
+<odoo>
+    <record model="ir.ui.view" id="inherited_project_project_form_view">
+        <field name="name">Inherited Project Project Form View</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <header>
+                <button name="print_report_sprint" string="Sprint Report" type="object" class="oe_highlight"/>
+                <button name="print_report_complete" string="General Report" type="object" class="oe_highlight"/>
+                <button name="generate_sprints" string="Generar Sprints" type="object" class="oe_highlight"/>
+            </header>
+            <field name="label_tasks" position="before">
+                <field name="prefix"/>
+            </field>
+            <page name="settings" position="after">
+                <page name="sequences" string="Secuencias">
+                    <group>
+                        <field name="sequence_id"/>
+                        <field name="requirement_sequence_id"/>
+                        <field name="sprint_sequence_id"/>
+                        <field name="minute_sequence_id"/>
+                    </group>
+                </page>
+            </page>
+            <xpath expr="/form/div/field[@name='message_follower_ids']" position="after">
+                <field name="message_ids" widget="mail_thread"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="project_project_view_form_simplified_inteligos">
+        <field name="name">Inherited Project Project Form View</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="prefix" class="o_project_name oe_inline" string="Project Prefix" placeholder="e.g. OP"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="task_type_edit_inteligos">
+        <field name="name">project.task.type.form</field>
+        <field name="model">project.task.type</field>
+        <field name="inherit_id" ref="project.task_type_edit"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="fold" position="after">
+                <field name="default"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="inherited_project_project_kanban_view">
+        <field name="name">Inherited Project Project Kanban View</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_kanban"/>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <xpath expr="/kanban/field[@name='name']" position="before">
+                <!--<field name="prefix"/>-->
+                <!--<field name="message_count" invisible="1"/>-->
+            </xpath>
+
+            <xpath expr="/kanban/templates/t/div/div[2]" position="after">
+                <div class="o_project_kanban_boxes">
+                    <div>
+                        <div type="object">
+                            <!--                            <span class="o_value"><t t-esc="record.message_count.value"/></span>-->
+                            <span class="o_label">Mensaje(s)</span>
+                        </div>
+                        <div type="object">
+                            <a name="details_project" type="object">Project Details</a>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

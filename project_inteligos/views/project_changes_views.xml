@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="tree_view_changes"  model="ir.ui.view" >
+        <field name="name">Project changes View</field>
+        <field name="model">project.change</field>
+        <field name="type">tree</field>
+<!--        <field name="priority">50</field>-->
+        <field name="arch" type="xml">
+
+            <tree>
+                <field name="state"/>
+                <field name="reference"/>
+                <field name="type"/>
+                <field name="request_partner_id"/>
+                <field name="request_date"/>
+                <field name="approve_partner_id"/>
+                <field name="approval_date"/>
+                <field name="delivered_date"/>
+
+            </tree>
+
+        </field>
+    </record>
+
+</odoo>

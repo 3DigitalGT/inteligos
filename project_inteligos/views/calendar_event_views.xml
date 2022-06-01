@@ -1,0 +1,32 @@
+<odoo>
+
+  <record model="ir.ui.view" id="inherit_form_view_minute_project">
+      <field name="name">Vista de proyectos en calendario</field>
+      <field name="model">calendar.event</field>
+      <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+      <field name="arch" type="xml">
+          <xpath expr="/form/sheet/div[3]" position="after">
+              <group string="Proyecto">
+                  <group >
+                      <field name="project_id"/>
+                      <field name="task_id" domain="[('project_id', '=', project_id)]" context="{'default_project_id': project_id}"/>
+                  </group>
+                  <group>
+                      <field name="minute_id" string="Minuta" domain="[('project_id', '=', project_id)]" context="{'default_event_id': id,'default_project_id':project_id,'default_name': name,'default_user_id': user_id, 'default_task_id': task_id }"/>
+                  </group>
+              </group>
+          </xpath>
+          <page name="page_details" position="after">
+              <page name="page_agenda" string="Agenda">
+                  <field name="agenda_ids" context="{'default_event_id': id}" nolabel="1">
+                      <tree create="true" editable="bottom">
+                          <field name="name"/>
+                          <field name="time"/>
+                      </tree>
+                  </field>
+              </page>
+          </page>
+      </field>
+    </record>
+
+</odoo>

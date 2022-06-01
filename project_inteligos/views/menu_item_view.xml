@@ -1,0 +1,37 @@
+<odoo>
+    <record model="ir.ui.view" id="minute_form_view_item">
+        <field name="name">Project Minute item Form View</field>
+        <field name="model">project.minute.item</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                             <field name = 'name'/>
+                        </group>
+
+                        <group>
+                            <field name = 'project_id' invisible="1" />
+
+                        </group>
+                    </group>
+
+
+                            <field name = 'discussion_pad' type="html" attrs="{'invisible': [('use_pad', '=', True)], 'readonly': [('use_pad', '=', True)]}" modifiers="{'invisible':[['use_pad','=',true]],'readonly':[['use_pad','=',true]]}"/>
+                            <field name= "use_pad" invisible="1"/>
+                            <field name= "discussion_pad" widget="pad" attrs="{'invisible': [('use_pad', '=', False)], 'readonly': [('use_pad', '=', False)]}"/>
+
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_project_minute_item">
+        <field name="name">Minute Item</field>
+        <field name="res_model">project.minute.item</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

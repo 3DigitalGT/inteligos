@@ -1,0 +1,117 @@
+<odoo>
+<!--   <record model="ir.ui.view" id="inherited_project_task_kanban_view">-->
+<!--       <field name="name">Inherited Project Task Kanban View</field>-->
+<!--       <field name="model">project.task</field>-->
+<!--       <field name="inherit_id" ref="project.view_task_kanban"/>-->
+<!--       <field name="type">kanban</field>-->
+<!--       <field name="arch" type="xml">-->
+<!--           &lt;!&ndash;<xpath expr="/kanban/field[@name='color']" position="after">&ndash;&gt;-->
+<!--               &lt;!&ndash;<field name="reference"/>&ndash;&gt;-->
+<!--           &lt;!&ndash;</xpath>&ndash;&gt;-->
+<!--           <xpath expr="/kanban/templates/t/div/div[1]/div[1]/div[1]/strong/field[@name='name']" position="replace">-->
+<!--               <div><strong><field name="display_name"/></strong></div>-->
+<!--           </xpath>-->
+
+<!--           &lt;!&ndash;<a name="247" position="after">&ndash;&gt;-->
+<!--               &lt;!&ndash;<a name="action_attachment_list" role="menuitem"&ndash;&gt;-->
+<!--                  &lt;!&ndash;type="object" class="dropdown-item">&ndash;&gt;-->
+<!--                   &lt;!&ndash;Archivos Adjuntos&ndash;&gt;-->
+<!--               &lt;!&ndash;</a>&ndash;&gt;-->
+<!--           &lt;!&ndash;</a>&ndash;&gt;-->
+<!--       </field>-->
+<!--   </record>-->
+
+    <record model="ir.ui.view" id="view_task_form2_meetings">
+       <field name="name">Meetings on Task</field>
+       <field name="model">project.task</field>
+       <field name="inherit_id" ref="project.view_task_form2"/>
+       <field name="arch" type="xml">
+
+<!--            <div name="button_box" position="inside">-->
+<!--               <button name="action_schedule_meeting" type="object" class="oe_stat_button" icon="fa-calendar">-->
+<!--                    <field name="meeting_counter" string="Reuniones" widget="statinfo"/>-->
+<!--                </button>-->
+<!--            </div>-->
+           <field name="stage_id" position="before">
+               <button name="action_change_state" string="Change State" type="object"/>
+           </field>
+           <field name="project_id" position="after"  >
+
+               <field name="reference"/>
+               <field name="scope"/>
+               <field name="approve_task_partner_id"/>
+               <field name="delivered_task_date"/>
+               <field name="task_state" />
+           </field>
+           <field name="tag_ids" position="after"  >
+
+               <field name="minute_id"/>
+               <field name="sprint_id" domain="[('project_id','=',project_id)]" />
+
+           </field>
+
+           <xpath expr="//notebook" position="inside">
+               <page string="Requerimientos">
+                   <field name="requirement_ids" context="{'default_project_id': project_id,'default_approved_by_id': approve_task_partner_id,'default_delivered_date': delivered_task_date, }"/>
+               </page>
+            </xpath>
+
+           <xpath expr="//page[@name='description_page']" position="before">
+               <page string="Resumen">
+                   <field name="summary" />
+               </page>
+            </xpath>
+
+    </field>
+    </record>
+
+<!--    <record model="ir.ui.view" id="view_task_search_form_inteligos">-->
+<!--       <field name="name">Inteligos Filter</field>-->
+<!--       <field name="model">project.task</field>-->
+<!--       <field name="inherit_id" ref="project.view_task_search_form"/>-->
+<!--       <field name="arch" type="xml">-->
+<!--           <filter name="unassigned" position="after">-->
+<!--               <separator/>-->
+<!--               <filter string="Implementacion" name="implementation_tasks" domain="[('scope', '=', 'i')]"/>-->
+<!--               <filter string="Desarrollo" name="development_tasks" domain="[('scope', '=', 'd')]"/>-->
+<!--               <filter string="Clientes" name="customer_tasks" domain="[('scope', '=', 'c')]"/>-->
+<!--               <filter string="Tickets" name="ticket_tasks" domain="[('scope', '=', 'c')]"/>-->
+<!--           </filter>-->
+<!--       </field>-->
+<!--    </record>-->
+
+    <record model="ir.ui.view" id="view_project_kanban">
+       <field name="name">Inteligos Kanban</field>
+       <field name="model">project.project</field>
+       <field name="inherit_id" ref="project.view_project_kanban"/>
+       <field name="arch" type="xml">
+           <field name="analytic_account_id" position="after">
+               <field name="task_count_imp"/>
+               <field name="task_count_dev"/>
+               <field name="task_count_cus"/>
+               <field name="task_count_tic"/>
+           </field>
+           <xpath expr="/kanban/templates/t/div/div[2]/div[1]/div/a" position="after">
+               <a class="o_project_kanban_box" name="implementation_tasks" type="object" t-if="record.task_count_imp.value > 0">
+                    <div >
+                        <span class="o_value"><t t-esc="record.task_count_imp.value"/></span>
+                        <span class="o_label">Tareas Implementacion</span>
+                    </div>
+                </a>
+               <a class="o_project_kanban_box" name="development_tasks" type="object" t-if="record.task_count_dev.value > 0">
+                    <div>
+                        <span class="o_value"><t t-esc="record.task_count_dev.value"/></span>
+                        <span class="o_label">Tareas Desarrollo</span>
+                    </div>
+                </a>
+               <a class="o_project_kanban_box" name="customer_tasks" type="object" t-if="record.task_count_cus.value > 0">
+                    <div>
+                        <span class="o_value"><t t-esc="record.task_count_cus.value"/></span>
+                        <span class="o_label">Tareas Cliente</span>
+                    </div>
+                </a>
+           </xpath>
+       </field>
+    </record>
+
+</odoo>

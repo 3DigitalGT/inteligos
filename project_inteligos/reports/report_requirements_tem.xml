@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<t t-esc ="docs.project_id.display_name"/>-->
+    <template id="report_details_card">
+        <t t-call="web.external_layout">
+        <t t-call="web.html_container">
+
+            <h1 style="text-align: center;"><strong>Requerimiento</strong>  </h1>
+            <h3 style="text-align: center;"><t t-esc = "name_requirement"/>   </h3>
+            <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                <tr sytle="padding: 15px;border:5px">
+                    <td style = "width: 50%  ;padding: 15px;border-radius:10px;background-color:#d5d8dc;  "><strong>Proyecto: </strong><t t-esc = "name_proyect"/> </td>
+                    <td style = "width: 50%  ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Cliente: </strong><t t-esc = "cliente"/> </td>
+                </tr>
+                <tr sytle="padding: 15px;border:5px">
+                    <td style = "width: 50%  ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Solicitado por: </strong><t t-esc = "name_requested"/> </td>
+                    <td style = "width: 50%  ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Autorizado por: </strong> <t t-esc = "name_approved"/>  </td>
+                </tr>
+                <tr sytle="padding: 15px;border:5px">
+                    <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Fecha de solicitud: </strong><t t-esc = "date_requested"/> </td>
+                    <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Fecha de autorizado: </strong> <t t-esc = "date_approved"/>  </td>
+                </tr>
+                <tr sytle="padding: 15px;border:5px">
+                    <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Requerimiento padre: </strong> <t t-esc = "parent"/> </td>
+                    <td style = "width: 50%  ;padding: 15px;border-radius:10px;background-color:#d5d8dc; "><strong>Fecha de entrega: </strong> <t t-esc = "delivered_date"/>   </td>
+                </tr>
+            </table>
+            <br></br>
+            <div>
+                <group>
+                    <group>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr sytle="padding: 10px;border:5px">
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Sprint: </strong> </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Cambios: <t t-esc = "total_changes"/></strong> </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Tareas: <t t-esc = "total_tasks"/></strong></td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px;"><strong>Avance: </strong>  </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; font-size:15px;"><strong>Hijos: </strong>  </td>
+                            </tr>
+                            <tr sytle="padding: 10  px;border:5px">
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Prioridad: <t t-esc = "priority"/></strong>  </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; font-size:15px;"><strong>Versión: <t t-esc = "version"/></strong>  </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Complejidad: <t t-esc = "complexity"/></strong> </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc;font-size:15px; "><strong>Hrs. Plan: <t t-esc = "planned_hours"/></strong>   </td>
+                                <td style = "width: 50% ;padding: 15px;border-radius:10px;background-color:#d5d8dc; font-size:15px;"><strong>Hrs. Real: <t t-esc = "effective_hours"/></strong>  </td>
+                            </tr>
+                        </table>
+                    </group>
+                </group>
+                <br></br>
+            </div>
+
+            <div>
+                <p style = "padding: 10px;background-color: #d5d8dc;border-radius:10px;">
+                    <strong>Solicitud Cliente: </strong> <span><t t-esc = "Details"/></span>
+                </p>
+            </div>
+            <div>
+                <p style = "padding: 10px;background-color: #d5d8dc;border-radius:10px;">
+                    <strong>Escenario: </strong> <span><t t-esc = "scenario"/></span>
+                </p>
+            </div>
+            <div>
+                <p style = "padding: 10px;background-color: #d5d8dc;border-radius:10px;">
+                    <strong>Solucion Propuesta: </strong> <span><t t-esc = "solution"/></span>
+                </p>
+            </div>
+            <div>
+                <p style = "padding: 10px;background-color: #d5d8dc;border-radius:10px;">
+                    <strong>Reglamentacion aplicable: </strong> <span>Donde?</span>
+                </p>
+            </div>
+            <t t-if="total_tasks != 0">
+                <h3>Tareas</h3>
+                <div style="page-break-before: always;">
+                    <table class="table table-sm o_main_table">
+                        <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                            <th name="th_description" class="text-left">No.</th>
+                            <th name="th_description" class="text-left">Tarea </th>
+                            <th name="th_description" class="text-left">Responsable</th>
+                            <th name="th_description" class="text-left">Departamento</th>
+                            <th name="th_description" class="text-left">Aprobado por</th>
+                            <th name="th_description" class="text-left">Fecha entrega</th>
+                        </tr>
+                        <t t-foreach="task" t-as="t">
+                            <tr style=" border:1px ;padding: 8px;">
+                                <td class="text-left"><span style="font-size: 15px" t-esc="t['No_task']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="t['task']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="t['in_charge_task']"/></td>
+                                <td class="text-left"><span /></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="t['approved_by_task']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="t['delivered_date_task']"/></td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+            </t>
+
+            <t t-if="total_changes != 0">
+                <div>
+                    <table class="table table-sm o_main_table">
+
+                        <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                            <th name="th_description" class="text-left">No.</th>
+                            <th name="th_description" class="text-left">Cambio </th>
+                            <th name="th_description" class="text-left">Responsable</th>
+                            <th name="th_description" class="text-left">Departamento</th>
+                            <th name="th_description" class="text-left">Aprobado por</th>
+                            <th name="th_description" class="text-left">Fecha entrega</th>
+                        </tr>
+                        <t t-foreach="changes" t-as="ch">
+                            <tr style=" border:1px ;padding: 8px;">
+                                <td class="text-left"><span style="font-size: 15px" t-esc="ch['No']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="ch['change']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="ch['in_charge']"/></td>
+                                <td class="text-left"><span /></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="ch['approved_by']"/></td>
+                                <td class="text-left"><span style="font-size: 15px" t-esc="ch['delivered_date']"/></td>
+                            </tr>
+                        </t>
+                    </table>
+                </div>
+
+            </t>
+
+
+            </t>
+        </t>
+
+
+    </template>
+</odoo>

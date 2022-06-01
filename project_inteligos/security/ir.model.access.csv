@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_project_inteligos_requirement,project_inteligos.requirement_user,model_project_requirement,project.group_project_user,1,1,1,1
+access_project_inteligos_sprint,project_inteligos.sprint_user,model_project_sprint,project.group_project_user,1,1,1,1
+access_project_inteligos_change,project_inteligos.change_user,model_project_change,project.group_project_user,1,1,1,1
+access_project_inteligos_minute_item,project_inteligos.minute_item_user,model_project_minute_item,project.group_project_user,1,1,1,1
+access_project_inteligos_minute,project_inteligos.minute_user,model_project_minute,project.group_project_user,1,1,1,1
+access_project_inteligos_commitmen,project_inteligos.commitment_user,model_project_minute_commitment,project.group_project_user,1,1,1,1
+access_project_inteligos_agenda,project_inteligos.agenda_user,model_calendar_agenda,project.group_project_user,1,1,1,1
