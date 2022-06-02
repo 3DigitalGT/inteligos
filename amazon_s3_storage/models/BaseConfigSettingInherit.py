@@ -15,7 +15,7 @@ class ResConfigSettings(models.TransientModel):
     def open_s3_conf(self):
         return {
             'type': 'ir.actions.act_window',
-            'name': 'Amazon S3 Configuration',
+            'name': 'Amazon S3 Configuration', 
             'view_type': 'form',
             'view_mode': 'form',
             'res_model': 's3.config',
