@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
-    'name': 'Accounting Report Audit Journal',
+    'name': 'Libro Diario',
     'version': '1.1',
-    'summary': 'Libro Diario',
+    'summary': 'Modulo para impresion del libro diario',
     'sequence': 15,
     'description': """ Modulo de implementacion Libro Diario
     """,
     'category': 'Invoicing Management',
-    'website': '',
+    'author': "Inteligos, S.A.",
+    'website': 'https://www.inteligos.gt',
     'depends' : ['account', 'base'],
     'data': [
         'report/journal_report_template.xml',
