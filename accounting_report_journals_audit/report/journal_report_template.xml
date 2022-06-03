@@ -109,7 +109,7 @@
                          <tr>
                              <th style="width:15%;border: 1px solid black">NO. CUENTA</th>
                              <th style="width:25%;border: 1px solid black">CUENTA</th>
-                             <th style="width:40%;border: 1px solid black">ETIQUETA</th>
+                             <th style="width:40%;border: 1px solid black">DESCRIPCION</th>
                              <th style="width:10%;border: 1px solid black">DEBE</th>
                              <th style="width:10%;border: 1px solid black">HABER</th>
                          </tr>
