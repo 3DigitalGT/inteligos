@@ -83,7 +83,7 @@ class AccountPrintJournalReport(models.TransientModel):
                                             'font_color': 'white',
                                             'font_size': 18})
         worksheet.merge_range('B1:D2', 'LIBRO DIARIO', merge_format)
-        worksheet.merge_range('B3:D3', 'NEXA, S.A', merge_format)
+        worksheet.merge_range('B3:D3', self.company_id.name, merge_format)
         worksheet.merge_range('B4:D4', str(self.date_from) + '-' + str(self.date_to), merge_format)
         for line in account_move_line:
             line_list = [line.move_id.name, line.account_id.code, line.account_id.name, line.name,
@@ -99,13 +99,13 @@ class AccountPrintJournalReport(models.TransientModel):
             crecit_sum = 0.0
             col = 0
             worksheet.set_column(row, col, 25)
-            worksheet.write(row - 2, col, "MOVE", bold)
+            worksheet.write(row - 2, col, "ASIENTO", bold)
             worksheet.write(row - 2, col + 1, elt[0], bold)
-            worksheet.write(row - 2, col + 2, "DATE", bold)
+            worksheet.write(row - 2, col + 2, "FECHA", bold)
             worksheet.write(row - 2, col + 3, str(elt[1]), bold)
-            worksheet.write(row - 1, col, "DESCRIPTION", bold)
+            worksheet.write(row - 1, col, "DESCRIPCION", bold)
             worksheet.write(row - 1, col + 1, elt[2], bold)
-            header = ['NO. CUENTA', 'CUENTA', 'ETIQUETA', 'DEBE', 'HABER']
+            header = ['NO. CUENTA', 'CUENTA', 'DESCRIPCION', 'DEBE', 'HABER']
 
             for e in header:
                 worksheet.set_column(row, col, 25)
