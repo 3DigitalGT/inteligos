@@ -39,7 +39,7 @@ class AccountPrintJournalReport(models.TransientModel):
         return result
 
     def _print_report(self, data):
-        report_name = 'journals_audit_report_{}.xls'.format(self.id)
+        report_name = 'libro_diario_reporte_{}.xls'.format(self.id)
         fp = BytesIO()
 
         workbook = Workbook(fp)
