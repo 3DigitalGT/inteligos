@@ -37,7 +37,7 @@ class S3InheritAttachment(models.Model):
 				_logger.error("--not found file-- name %r--",self._get_s3_full_path(fname))
 		else:
 			return super(S3InheritAttachment, self)._file_read(fname)
-		return b''
+		return super(S3InheritAttachment, self)._file_read(fname)
 
 	@api.model
 	def _get_s3_full_path(self, path):
