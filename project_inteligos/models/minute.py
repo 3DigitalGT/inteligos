@@ -39,7 +39,7 @@ class ProjectMinute(models.Model):
         return self.env.company
 
     name = fields.Char('Titulo')
-    code = fields.Char('Codigo',compute="_code_get")
+    code = fields.Char('Codigo', compute="_code_get")
     company_id = fields.Many2one('res.company', string='Company', required=True, default=_default_company_id)
     sequence = fields.Char("Secuencia")
     event_id = fields.Many2one('calendar.event', 'Reunión', required=True)
@@ -86,17 +86,12 @@ class ProjectMinute(models.Model):
             else:
                 record.code = f'[{str(self.sequence)}]'
 
-
     def action_print(self):
-
         data = {
             'model': 'project.minute',
-            # 'form' : self.read(),
-            'name': self.read()[0].get('name'),
-            'event_id': self.read()[0].get('event_id')[1],
-            'project_id': self.read()[0].get('project_id')[1],
-            # 'test_id': self.read()[0].get('test_id')[1],
-            # 'survey_id': self.read()[0].get('survey_idsurvey_id'),
+            'name': self.name,
+            'event_id': self.event_id.id,
+            'project_id': self.project_id.id
         }
 
         # Codigo Datos Puntos
@@ -105,21 +100,10 @@ class ProjectMinute(models.Model):
         pnt = 1
         for pt in points:
             r = requests.get(
-                url=pt.discussion_pad,
-                # data=json.dumps(credentials),
-                # headers=headers,
-                # verify=cert_file_path,
-                # timeout=10,
+                url=pt.discussion_pad
             )
-            #
-            # # response = r.json()
-            # # token = response.get('Token', False)
-            # print(r.text)
             soup = BeautifulSoup(r.content, 'html5lib')
             table = soup.find('body', attrs={'id': 'innerdocbody'})
-            print(table)
-            print(pt.discussion_pad)
-            # print(table.prettify())
 
             vals_p = {
                 'pnt': pnt,
@@ -133,44 +117,37 @@ class ProjectMinute(models.Model):
 
         # Codigo Datos tareas
         task_list = []
-        tasks = self.task_id
         no_task = 1
-        for tk in tasks:
-            print(tk.delivered_task_date)
-            if not tk.delivered_task_date:
-                vals_t = {
-                    'No_task': no_task,
-                    'task': tk.name,
-                    'in_charge_task': tk.user_id.read()[0].get('partner_id')[1],
-                    # 'department': ,
-                    # 'approved_by_task': tk.approve_task_partner_id.read(),
-                    'delivered_date_task': ' ',
-                }
-            else:
-                vals_t = {
-                    'No_task': no_task,
-                    'task': tk.name,
-                    'in_charge_task': tk.user_id.read()[0].get('partner_id')[1],
-                    # 'department': ,
-                    # 'approved_by_task': tk.approve_task_partner_id.read(),
-                    'delivered_date_task': tk.delivered_task_date.strftime('%d/%m/%Y'),
-                }
-            task_list.append(vals_t)
-            no_task += 1
+
+        if not self.task_id.delivered_task_date:
+            vals_t = {
+                'No_task': no_task,
+                'task': self.task_id.name,
+                'in_charge_task': self.task_id.user_ids.mapped('partner_id').ids,
+                'delivered_date_task': ' ',
+            }
+        else:
+            vals_t = {
+                'No_task': no_task,
+                'task': self.task_id.name,
+                'in_charge_task': self.task_id.user_ids.mapped('partner_id').ids,
+                'delivered_date_task': self.task_id.delivered_task_date.strftime('%d/%m/%Y'),
+            }
+        task_list.append(vals_t)
+        no_task += 1
 
         data.update({'task': task_list, 'len_task': len(task_list)})
         # Codigo Datos requerimientos
         requirement_list = []
         requirements = self.env["project.requirement"].browse(self.read()[0].get('requirements_ids'))
         no_req = 1
+
         for req in requirements:
             vals_r = {
                 'no_req': no_req,
                 'name': req.name,
                 'request_date': req.request_date.strftime('%d/%m/%Y'),
-                # 'department': ,
-                'delivered_date': req.delivered_date.strftime('%d/%m/%Y'),
-
+                'delivered_date': req.delivered_date.strftime('%d/%m/%Y')
             }
             requirement_list.append(vals_r)
             no_req += 1
@@ -181,6 +158,7 @@ class ProjectMinute(models.Model):
         commitment_list = []
         commitment = self.env["project.minute.commitment"].browse(self.read()[0].get('commitment_ids'))
         no_com = 1
+
         for com in commitment:
             vals_c = {
                 'no_req': no_com,
@@ -191,9 +169,11 @@ class ProjectMinute(models.Model):
             commitment_list.append(vals_c)
             no_com += 1
         data.update({'commitments': commitment_list})
+
         # Datos Evento
         ate = self.env["calendar.event"].browse(self.event_id.id)
         ast_list = {index + 1: t.name for index, t in enumerate(ate.partner_ids)}  # LIST COMP
+
         if not ate.start_datetime:
             date_start = " "
         else:
@@ -206,17 +186,9 @@ class ProjectMinute(models.Model):
         data.update({'assistants': ast_list, 'location': location, 'start_date': date_start})
         return self.env.ref('project_inteligos.report_minute_details').report_action(self, data=data)
 
-    # def _find_mail_template(self):
-    #     template_id = int(self.env['ir.config_parameter'].sudo().get_param('project_inteligos.minute_template_inteligos'))
-    #     template_id = self.env['mail.template'].search([('id', '=', template_id)]).id
-    #     if not template_id:
-    #         template_id = self.env['ir.model.data']._xmlid_to_res_id('sale.mail_template_sale_confirmation', raise_if_not_found=False)
-    #     return template_id
-
     def action_send(self):
         ''' Opens a wizard to compose an email, with relevant mail template loaded by default '''
         self.ensure_one()
-        #template_id = self._find_mail_template()
         template_id = self.env['ir.model.data']._xmlid_to_res_id('project_inteligos.minute_template_inteligos')
         lang = self.env.context.get('lang')
         template = self.env['mail.template'].browse(template_id)
