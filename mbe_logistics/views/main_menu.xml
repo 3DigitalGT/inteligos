@@ -1,0 +1,20 @@
+<odoo>
+
+    <!-- Top MBE Logistics menu item -->
+    <menuitem name="Logística" id="menu_logistic" web_icon="mbe_logistics,static/description/logo.jpg" icon="fa-tint"
+              groups="mbe_logistics.group_mbe_logistics_user,mbe_logistics.group_mbe_logistics_manager" sequence="60"/>
+
+    <menuitem id="menu_logistics_manifest" name="Manifiestos" parent="menu_logistic" sequence="2"/>
+    <menuitem id="menu_logistics_package" name="Paquetes" parent="menu_logistic" sequence="3"/>
+    <menuitem id="menu_logistics_miscellaneous" name="Documentos Clientes" parent="menu_logistic" sequence="4"/>
+
+    <menuitem id="menu_logistics_sale_orders" name="Pedidos de Venta" sequence="1"
+              parent="menu_logistics_miscellaneous" action="sale.action_orders"/>
+    <menuitem id="menu_logistics_account_moves" name="Facturas" sequence="2"
+              parent="menu_logistics_miscellaneous" action="account.action_move_out_invoice_type"/>
+    <menuitem id="menu_logistics_clients" name="Contactos" sequence="3"
+              parent="menu_logistics_miscellaneous" action="account.res_partner_action_customer"/>
+    <menuitem id="menu_logistics_payments" name="Pagos" sequence="4"
+              parent="menu_logistics_miscellaneous" action="account.action_account_payments"/>
+
+</odoo>
