@@ -21,49 +21,43 @@ class InheritSaleOrderLogistic(Model):
         inverse_name="sale_order_id",
         string="Paquetes",
         help="Paquetes incluidos en la orden",
-        tracking=3
+        store=True
     )
     logistic_employed_iva = Monetary(
         string="Cuenta Ajena IVA",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     logistic_employed_dai = Monetary(
         string="Cuenta Ajena DAI",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     logistic_employed_others = Monetary(
         string="Cuenta Ajena Otros",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     logistic_employed = Monetary(
         string="Cuenta Ajena",
         help="Campo donde se agrega el monto total de las cuentas ajenas.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     total_cif = Monetary(
         string="CIF",
         help="Campo donde se calcula la suma de los valores quetzalisados de los paquetes.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     oea = Text(
         string="OEA",
         help="Campo que almacena el unificado de las guías y secuencias de manifiesto de cada uno de los paquetes.",
         copy=True,
-        tracking=3,
-        default=0,
+        default=0
     )
     total_logistic = Monetary(
         string="Total de logística",
@@ -71,7 +65,7 @@ class InheritSaleOrderLogistic(Model):
         compute="_compute_total_logistic",
         copy=True,
         store=True,
-        default=0,
+        default=0
     )
 
     def set_data_from_packages(self):

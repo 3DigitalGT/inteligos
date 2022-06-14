@@ -43,35 +43,29 @@ class InheritSaleOrderLogistic(Model):
         string="Cuenta Ajena IVA",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
         default=0,
     )
     logistic_employed_dai = Monetary(
         string="Cuenta Ajena DAI",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
         default=0,
     )
-
     logistic_employed_others = Monetary(
         string="Cuenta Ajena Otros",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=3,
         default=0,
     )
     logistic_employed = Monetary(
         string="Cuenta Ajena",
         help="Campo donde se agrega el monto total de las cuentas ajenas.",
         copy=True,
-        tracking=3,
         default=0,
     )
     receipt_id = Many2one(
         comodel_name="account.move",
         string="Recibo",
-        tracking=3
     )
     total_logistic = Monetary(
         string="Total de logística",

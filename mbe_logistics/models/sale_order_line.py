@@ -13,5 +13,5 @@ class InheritSaleOrderLineLogistic(Model):
         comodel_name="mbe_logistics.package",
         string="Paquete",
         help="Paquete incluido en la línea de la orden",
-        tracking=3
+        store=True
     )
