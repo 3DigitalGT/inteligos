@@ -6,3 +6,6 @@
 	path = addons_rrhh
 	url = git@github.com:3DigitalGT/addons_rrhh.git
 	branch = release/15.0
+[submodule "addons_whatsapp"]
+	path = addons_whatsapp
+	url = git@github.com:3DigitalGT/addons_whatsapp.git
