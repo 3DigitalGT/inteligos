@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+# TODO: MANTENERLO MIENTRAS SE HACEN LAS EVALUACIONES DE USO
+# import sys
+# sys.path.append('C:/Users/UsuarioDocuments/Odoo15/Custom_addons_Odoo15/main_account/addons_gen')
+#
+# for line in sys.path:
+#     print(line)
 
 from datetime import datetime
 from pytz import timezone, UTC
@@ -7,11 +13,11 @@ from odoo.models import Model
 from odoo.api import depends
 from odoo.fields import (One2many, Monetary, Many2one, Date, Char)
 from odoo.exceptions import ValidationError
-from ..providers.infile import InfileFel, emisor, receptor
-from ..providers.digifact import DigifactFel, DigifactEmisor, DigifactReceptor
-from ..providers.contap import ContapFel, ContapEmisor, ContapReceptor
-from ..providers.megaPrint import MegaPrintFel, MegaPrintEmisor, MegaPrintReceptor
-from ..providers.ecofacturas import EcofacturaFel, EcofacturaEmisor, EcofacturaReceptor
+from ...addons_gen.l10n_gt_inteligos_fel.providers.infile import InfileFel, emisor, receptor
+from ...addons_gen.l10n_gt_inteligos_fel.providers.digifact import DigifactFel, DigifactEmisor, DigifactReceptor
+from ...addons_gen.l10n_gt_inteligos_fel.providers.contap import ContapFel, ContapEmisor, ContapReceptor
+from ...addons_gen.l10n_gt_inteligos_fel.providers.ecofacturas import EcofacturaFel, EcofacturaEmisor, EcofacturaReceptor
+from ...addons_gen.l10n_gt_inteligos_fel.providers.megaPrint import MegaPrintFel, MegaPrintEmisor, MegaPrintReceptor
 
 _logger = getLogger(__name__)
 
@@ -37,14 +43,14 @@ class InheritSaleOrderLogistic(Model):
         string="Cuenta Ajena IVA",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     logistic_employed_dai = Monetary(
         string="Cuenta Ajena DAI",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
 
@@ -52,20 +58,20 @@ class InheritSaleOrderLogistic(Model):
         string="Cuenta Ajena Otros",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     logistic_employed = Monetary(
         string="Cuenta Ajena",
         help="Campo donde se agrega el monto total de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     receipt_id = Many2one(
         comodel_name="account.move",
         string="Recibo",
-        tracking=True
+        tracking=3
     )
     total_logistic = Monetary(
         string="Total de logística",
@@ -248,7 +254,7 @@ class InheritSaleOrderLogistic(Model):
             gt = timezone('America/Guatemala')
             utc_dt = datetime.now(tz=UTC).astimezone(gt)
             custom_dt = datetime.combine(move.invoice_date, datetime.min.time()) \
-                if move.invoice_date and move.invoice_date < fields.Date.today() else False
+                if move.invoice_date and move.invoice_date < Date.today() else False
             dt = utc_dt if not custom_dt else custom_dt
 
             dtime_emission = False

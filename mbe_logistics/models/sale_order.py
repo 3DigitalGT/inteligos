@@ -21,48 +21,48 @@ class InheritSaleOrderLogistic(Model):
         inverse_name="sale_order_id",
         string="Paquetes",
         help="Paquetes incluidos en la orden",
-        tracking=True
+        tracking=3
     )
     logistic_employed_iva = Monetary(
         string="Cuenta Ajena IVA",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     logistic_employed_dai = Monetary(
         string="Cuenta Ajena DAI",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     logistic_employed_others = Monetary(
         string="Cuenta Ajena Otros",
         help="Campo donde se agrega el monto de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     logistic_employed = Monetary(
         string="Cuenta Ajena",
         help="Campo donde se agrega el monto total de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     total_cif = Monetary(
         string="CIF",
         help="Campo donde se calcula la suma de los valores quetzalisados de los paquetes.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     oea = Text(
         string="OEA",
         help="Campo que almacena el unificado de las guías y secuencias de manifiesto de cada uno de los paquetes.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
     total_logistic = Monetary(
@@ -254,7 +254,7 @@ class InheritSaleOrderLogistic(Model):
 
         if self.package_ids:
             invoice_vals = self._prepare_invoice()
-            invoice_vals['type'] = 'out_receipt'
+            invoice_vals['move_type'] = 'out_receipt'
             invoice_vals['invoice_line_ids'] = [
                 (0, 0, {
                     'display_type': False,

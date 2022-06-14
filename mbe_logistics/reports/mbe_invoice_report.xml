@@ -17,7 +17,6 @@
         <field name="dpi">90</field>
     </record>
 
-    <!-- QWeb Reports -->
     <record id="account_invoice_mbe" model="ir.actions.report">
         <field name="name">Factura MBE</field>
         <field name="model">account.move</field>

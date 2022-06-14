@@ -41,26 +41,26 @@ class Package(Model):
         help="Guía del paquete.",
         copy=True,
         required=True,
-        tracking=True,
+        tracking=3,
     )
     qty = Float(
         string="Cantidad",
         help="Campo que se utiliza para agregar la cantidad de los paquetes",
         copy=True,
-        tracking=True,
+        tracking=3,
     )
     manifest_id = Many2one(
         comodel_name="mbe_logistics.manifest",
         string="Manifiesto",
         help="Campo para relacionar los paquetes con los manifiestos",
         copy=False,
-        tracking=True,
+        tracking=3,
     )
     factor = Float(
         string="Factor",
         help="El factor que se aplica por el DAI",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=1.19
     )
     real_price = Float(
@@ -68,20 +68,20 @@ class Package(Model):
         help="campo para ingresar el precio real que proviene del PO",
         copy=True,
         required=False,
-        tracking=True,
+        tracking=3,
     )
     tariff_class = Char(
         string="Partida",
         help="Partida Arancelaria",
         copy=True,
-        tracking=True
+        tracking=3
     )
     weight = Float(
         digits=(10, 7),
         string="Peso (kg.)",
         help="Peso en kilos",
         copy=True,
-        tracking=True
+        tracking=3
     )
     weight_grams = Float(
         digits=(10, 7),
@@ -101,31 +101,31 @@ class Package(Model):
         string="Alto",
         help="Alto de paquete en pulgadas",
         copy=True,
-        tracking=True
+        tracking=3
     )
     width = Float(
         string="Ancho",
         help="Ancho del paquete en pulgadas",
         copy=True,
-        tracking=True
+        tracking=3
     )
     length = Float(
         string="Largo",
         help="Largo del paquete en pulgadas",
         copy=True,
-        tracking=True
+        tracking=3
     )
     dimensions = Float(
         string="Dimensiones",
         help="Campo utilizado para ingresar el ancho del paquete en pulgadas",
         copy=True,
-        tracking=True
+        tracking=3
     )
     value = Monetary(
         string="Valor",
         help="Valor del paquete",
         copy=True,
-        tracking=True
+        tracking=3
     )
     value_gt = Monetary(
         string="Valor (Q.)",
@@ -137,58 +137,58 @@ class Package(Model):
         string="Skywayno",
         help="Campo utilizado para ingresar el Sky way no",
         copy=True,
-        tracking=True
+        tracking=3
     )
     documentation = Boolean(
         string="Documentación",
         help="Si tiene o no su factura",
         copy=False,
-        tracking=True
+        tracking=3
     )
     supplier_name = Char(
         string='Proveedor',
         help="Proveedor del paquete",
         copy=True,
-        tracking=True
+        tracking=3
     )
     carrier_name = Char(
         string="Transportista",
         help="Transportista que entregó el paquete en Miami",
         copy=True,
-        tracking=True
+        tracking=3
     )
     mawb = Char(
         string="Mawb",
         help="campo para agregar el mawb para los paquetes",
         copy=True,
-        tracking=True
+        tracking=3
     )
     sky_store = Char(
         string="Skystore",
         help="Campo para agregar el sky store en los paquetes",
         copy=True,
-        tracking=True
+        tracking=3
     )
     skybox = Many2one(
         comodel_name="res.partner",
         string="Skybox",
         help="Campo para agregar el sky box en los paquetes",
         copy=True,
-        tracking=True,
+        tracking=3,
         required=True
     )
     tracking = Char(
         string="# seguimiento del transportista",
         help="",
         copy=True,
-        tracking=True
+        tracking=3
     )
     currency_id = Many2one(
         comodel_name='res.currency',
         string='Moneda',
         help="Campo para la moneda del paquete",
         copy=True,
-        tracking=True
+        tracking=3
     )
     freight = Monetary(
         digits=(10, 7),
@@ -196,20 +196,20 @@ class Package(Model):
         help="Peso para Aduanas",
         compute="_compute_freight",
         copy=True,
-        tracking=True
+        tracking=3
     )
     expenses = Monetary(
         string="Gastos",
         help="Gastos Adicionales para presentar Póliza",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0
     )
     insurance = Monetary(
         string="Seguro",
         help="Monto del seguro del paquete",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0
     )
     other_expenses = Monetary(
@@ -222,7 +222,7 @@ class Package(Model):
         string="Arancel",
         help="Porcentaje(%) de Arancel",
         copy=True,
-        tracking=True
+        tracking=3
     )
     state = Selection(
         selection=[
@@ -235,7 +235,7 @@ class Package(Model):
         string="Estado",
         help="campo para seleccionar el estado de los paquetes",
         copy=False,
-        tracking=True,
+        tracking=3,
         default="transit"
     )
     dai = Monetary(
@@ -243,26 +243,26 @@ class Package(Model):
         string="DAI",
         help="Agregar el monto del DAI",
         copy=True,
-        tracking=True
+        tracking=3
     )
     iva = Monetary(
         digits=(10, 4),
         string="IVA",
         help="Agregar el monto del IVA",
         copy=True,
-        tracking=True
+        tracking=3
     )
     description = Char(
         string="Descripción",
         help="Descripción del paquete",
         copy=True,
-        tracking=True
+        tracking=3
     )
     custom_expenses = Monetary(
         string="Gastos Aduana",
         help="Gastos Incurridos en Aduana",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0
     )
     sale_order_id = Many2one(
@@ -270,13 +270,13 @@ class Package(Model):
         string="Pedido de Venta",
         help="Campo utilizado para relacionar con la orden de venta",
         copy=False,
-        tracking=True
+        tracking=3
     )
     logistic_employed = Monetary(
         string="Cuenta Ajena",
         help="Campo donde se agrega el monto total de las cuentas ajenas.",
         copy=True,
-        tracking=True,
+        tracking=3,
         default=0,
     )
 

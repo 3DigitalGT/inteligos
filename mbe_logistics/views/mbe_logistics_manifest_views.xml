@@ -64,7 +64,7 @@
                         <page string="Paquetes" name="packages">
                             <field name="package_ids">
                                 <tree string="Paquetes" editable="bottom" name="packages"
-                                      context="{'default_carrier_name': manifest_id.carrier_id.name}">
+                                      context="{'default_carrier_name': active_id.carrier_id.name}">
                                     <field name="name"/>
                                     <field name="skybox" optional="hide"/>
                                     <field name="description" optional="show"/>

@@ -1,8 +1,7 @@
 <odoo>
 
-    <!-- Top MBE Logistics menu item -->
-    <menuitem name="Logística" id="menu_logistic" web_icon="mbe_logistics,static/description/logo.jpg" icon="fa-tint"
-              groups="mbe_logistics.group_mbe_logistics_user,mbe_logistics.group_mbe_logistics_manager" sequence="60"/>
+    <menuitem name="Logística" id="menu_logistic" web_icon="mbe_logistics,static/description/logo.jpg"
+              groups="mbe_logistics.group_mbe_logistics_user" sequence="60"/>
 
     <menuitem id="menu_logistics_manifest" name="Manifiestos" parent="menu_logistic" sequence="2"/>
     <menuitem id="menu_logistics_package" name="Paquetes" parent="menu_logistic" sequence="3"/>

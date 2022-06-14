@@ -7,9 +7,9 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Paquetes" groups="mbe_logistics.group_mbe_logistics_account_user">
+                <page string="Paquetes" attrs="{'invisible': [('package_ids', '=', False)]}" groups="mbe_logistics.group_mbe_logistics_account_user">
                     <field name="package_ids" attrs="{'invisible': [('package_ids', '=', False)]}">
-                        <tree string="Paquetes" editable="bottom" name="package">
+                        <tree string="Paquetes" delete="0" editable="bottom" name="package">
                             <field name="name"/>
                             <field name="sale_order_id" invisible="1"/>
                             <field name="supplier_name" optional="show"/>
@@ -34,14 +34,14 @@
                         attrs="{'invisible':[('state', '!=', 'draft')]}"/>
             </xpath>
 
-            <xpath expr="//field[@name='amount_total']" position="after">
+            <field name="tax_totals_json" position="after">
                 <field name="total_logistic" attrs="{'invisible': [('package_ids', '=', False)]}" string="Gran Total" widget="monetary"/>
                 <field name="logistic_employed_iva" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
                 <field name="logistic_employed_dai" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
                 <field name="logistic_employed_others" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
                 <field name="logistic_employed" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
                 <field name="total_cif" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
-            </xpath>
+            </field>
         </field>
     </record>
 

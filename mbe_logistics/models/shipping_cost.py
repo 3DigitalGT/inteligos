@@ -13,4 +13,4 @@ class ShippingCost(Model):
     price_usd = Float(string="Precio USD")
     price_unit = Float(string="Coste")
     product_id = Many2one(comodel_name="product.product", string="Producto")
-    manifest_id = Many2one(comodel_name="mbe_logistics.manifest", string="Manifiesto", tracking=True)
+    manifest_id = Many2one(comodel_name="mbe_logistics.manifest", string="Manifiesto", tracking=3)

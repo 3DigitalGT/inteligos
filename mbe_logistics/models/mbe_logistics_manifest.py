@@ -15,7 +15,7 @@ class Manifest(Model):
     name = Char(
         string="# Referencia",
         copy=False,
-        tracking=True
+        tracking=3
     )
     state = Selection(
         selection=[
@@ -23,49 +23,49 @@ class Manifest(Model):
             ('customs', 'Aduana'), ('in_warehouse', 'En Bodega')
         ],
         default="prepared",
-        string="Estado", tracking=True
+        string="Estado", tracking=3
     )
     supplier_id = Many2one(
         comodel_name="res.partner",
         string="Proveedor",
-        tracking=True
+        tracking=3
     )
     carrier_id = Many2one(
         comodel_name="res.partner",
         string="Transportista",
-        tracking=True
+        tracking=3
     )
     reference = Char(
         string="Referencia",
-        tracking=True
+        tracking=3
     )
     guide_bl = Char(
         string="Guía/BL",
-        tracking=True
+        tracking=3
     )
     dispatch_date = Date(
         string="Fecha de despacho",
-        tracking=True
+        tracking=3
     )
     prepared_date = Date(
         string="Fecha Preparado",
         help="Conforme cambia el estado, agregar fecha a los campos de fechas acorde al estado",
-        tracking=True
+        tracking=3
     )
     in_transit_date = Date(
         string="Fecha En Tránsito",
         help="Conforme cambia el estado, agregar fecha a los campos de fechas acorde al estado",
-        tracking=True
+        tracking=3
     )
     customs_date = Date(
         string="Fecha Aduana",
         help="Conforme cambia el estado, agregar fecha a los campos de fechas acorde al estado",
-        tracking=True
+        tracking=3
     )
     in_warehouse_date = Date(
         string="Fecha Entregado",
         help="Conforme cambia el estado, agregar fecha a los campos de fechas acorde al estado",
-        tracking=True
+        tracking=3
     )
     transport_type = Selection(
         selection=[
@@ -75,24 +75,24 @@ class Manifest(Model):
             ('land', 'Terrestre')
         ],
         default="maritime",
-        string="Transporte", tracking=True
+        string="Transporte", tracking=3
     )
     package_ids = One2many(
         comodel_name="mbe_logistics.package",
         inverse_name="manifest_id",
         string="Paquetes",
-        tracking=True
+        tracking=3
     )
     shipping_cost_ids = One2many(
         comodel_name="shipping.cost",
         inverse_name="manifest_id",
         string="Gastos de Envío",
-        tracking=True
+        tracking=3
     )
     currency_id = Many2one(
         comodel_name="res.currency",
         string="Moneda",
-        tracking=True,
+        tracking=3,
         default=lambda self: self.env.ref('base.USD').id
     )
     exchange_rate = Float(
