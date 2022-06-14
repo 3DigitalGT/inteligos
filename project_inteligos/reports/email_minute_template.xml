@@ -1,0 +1,130 @@
+<odoo>
+    <data>
+       <!--Email template -->
+       <record id="minute_template_inteligos" model="mail.template">
+           <field name="name">Minute Email Template</field>
+           <field name="model_id" ref="project_inteligos.model_project_minute"/>
+           <field name="email_from">${(object.user_id.email | safe}</field>
+<!--           <field name="partner_to" >${object.get_partner_ids()}</field>-->
+           <field name="subject">Minuta de Reunión {{object.code or 'n/a' }} - {{object.name or 'n/a' }}</field>
+<!--           <field name="report_template" ref="project_inteligos.report_minute_card"/>-->
+<!--           <field name="report_name">Minuta de Reunión {{object.code}} {{object.name}}</field>-->
+<!--           <field name="auto_delete" eval="True"/>-->
+           <field name="lang">${object.user_id.lang}</field>
+           <field name="body_html">
+               <![CDATA[
+               <h2 style="text-align: center; margin-bottom: 8px;">Minuta de Reunión <span t-field = "object.code"/><br/><span t-field = "object.name"/></h2>
+                  <table class = "table table-sm o_main_table">
+                    <thead style="display: table-row-group">
+                      <tr>
+                          <th><span style="font-weight:bold;">Proyecto:</span></th>
+                          <th><t t-esc = "object.project_id.display_name"/></th>
+                          <th><strong>Horario: </strong></th>
+                          <th>De <t t-esc = "object.event_id.start"/> a <t t-esc = "object.event_id.stop"/> </th>
+                      </tr>
+                      <tr>
+                          <th><strong>Lugar: </strong></th>
+                          <th colspan="3"><t t-esc = "object.event_id.location"/> </th>
+                      </tr>
+                      <tr>
+                          <th><strong>Invitados: </strong></th>
+                          <th colspan="3"><span t-field = "object.event_id.partner_ids" widget="many2many_tags"/> </th>
+                      </tr>
+                      <tr><td colspan="4"/></tr>
+                    </thead>
+                  </table>
+                  <!--                Asistencia-->
+                  <br/>
+                  <h4 style="text-align: left;">Participantes</h4>
+                  <table class="table table-sm o_main_table" width="50%">
+                    <thead style="display: table-row-group">
+                      <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                          <th name="th_description" class="text-left">Nombre</th>
+                      </tr>
+                    </thead>
+                    <tbody class="sale_tbody">
+                      <t t-foreach="object.partner_ids" t-as="t">
+                          <tr style=" border:1px ;padding: 8px;">
+                              <td class="text-left"><span style="font-size: 15px" t-field="t.name"/></td>
+                          </tr>
+                      </t>
+                    </tbody>
+                  </table>
+                  <!--PUNTOS-->
+                  <br/>
+                  <h4 style="text-align: left;">Puntos de Agenda</h4>
+                  <t t-foreach="object.item_ids" t-as="i">
+                    <table class="table table-sm o_main_table">
+                      <thead style="display: table-row-group">
+                        <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                            <th name="th_description" class="text-left"><span t-field="i.name"/></th>
+                        </tr>
+                      </thead>
+                      <tbody class="sale_tbody">
+                        <tr style=" border:1px ;padding: 8px;">
+                            <td class="text-left"><span style="font-size: 15px" t-raw="i.discussion" widget="html"/></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </t>
+                  <!-- ACUERDOS -->
+                  <br/>
+                  <t t-if="object.commitment_ids">
+                      <div>
+                          <h4 style="text-align: left;">Acuerdos/Conclusiones</h4>
+                          <table class="table table-sm o_main_table">
+                            <thead style="display: table-row-group">
+                              <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                                  <th name="th_description" class="text-left">Acuerdo/Conclusión</th>
+                                  <th name="th_description" class="text-left">Aprobado por:</th>
+                              </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                              <t t-foreach="object.commitment_ids" t-as="c">
+                                  <tr style=" border:1px ;padding: 8px;">
+                                      <td class="text-left"><span style="font-size: 15px" t-esc="c.name"/></td>
+                                      <td class="text-left"><span style="font-size: 15px" t-field="c.approved_by"/></td>
+                                  </tr>
+                              </t>
+                            </tbody>
+                          </table>
+                      </div>
+                  </t>
+                  <!-- TAREAS -->
+                  <br/>
+                  <t t-if="object.task_ids">
+                      <div>
+                          <h4 style="text-align: left;">Tareas por Realizar</h4>
+                          <table class="table table-sm o_main_table">
+                            <thead style="display: table-row-group">
+                              <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                                  <th name="th_description" class="text-left">Tarea </th>
+                                  <th name="th_description" class="text-left">Ámbito</th>
+                                  <th name="th_description" class="text-left">Encargado </th>
+                                  <th name="th_description" class="text-left">Fecha De Entrega </th>
+                              </tr>
+                            </thead>
+                            <tbody class="sale_tbody">
+                              <t t-foreach="object.task_ids" t-as="t">
+                                  <tr style=" border:1px ;padding: 8px;">
+                                      <td class="text-left"><span style="font-size: 15px" t-esc="t.name"/></td>
+                                      <td class="text-left"><span style="font-size: 15px" t-field="t.scope"/></td>
+                                      <td class="text-left"><span style="font-size: 15px" t-field="t.user_ids" widget="many2many_tags"/></td>
+                                      <td class="text-left"><span style="font-size: 15px" t-esc="t.date_deadline"/></td>
+                                  </tr>
+                              </t>
+                            </tbody>
+                          </table>
+                      </div>
+                  </t>
+
+
+
+
+                ]]>
+           </field>
+       </record>
+   </data>
+</odoo>
+
+

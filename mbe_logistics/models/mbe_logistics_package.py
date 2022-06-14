@@ -41,20 +41,20 @@ class Package(Model):
         help="Guía del paquete.",
         copy=True,
         required=True,
-        tracking=3,
+        tracking=3
     )
     qty = Float(
         string="Cantidad",
         help="Campo que se utiliza para agregar la cantidad de los paquetes",
         copy=True,
-        tracking=3,
+        tracking=3
     )
     manifest_id = Many2one(
         comodel_name="mbe_logistics.manifest",
         string="Manifiesto",
         help="Campo para relacionar los paquetes con los manifiestos",
         copy=False,
-        tracking=3,
+        tracking=3
     )
     factor = Float(
         string="Factor",
@@ -68,7 +68,7 @@ class Package(Model):
         help="campo para ingresar el precio real que proviene del PO",
         copy=True,
         required=False,
-        tracking=3,
+        tracking=3
     )
     tariff_class = Char(
         string="Partida",

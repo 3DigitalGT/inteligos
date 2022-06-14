@@ -28,7 +28,7 @@ class Manifest(Model):
     supplier_id = Many2one(
         comodel_name="res.partner",
         string="Proveedor",
-        tracking=3
+        tracking=3,
     )
     carrier_id = Many2one(
         comodel_name="res.partner",

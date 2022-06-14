@@ -1,0 +1,555 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--<t t-esc ="docs.project_id.display_name"/>-->
+    <template id="report_general_card">
+        <t t-call="web.external_layout">
+            <t t-call="web.html_container">
+                <h1 style="text-align: center;">Reporte  General </h1>
+                <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                    <tr sytle="padding: 15px;border:5px;">
+                        <td  style = "width: 50%  ;padding: 15px;  font-size:13px;"><strong>Proyecto:</strong> <t t-esc = "name"/></td>
+                        <td  style = "width: 50%  ;padding: 15px;  font-size:13px;"><strong>Cliente:</strong> <t t-esc = "cliente"/></td>
+                    </tr>
+                    <tr sytle="padding: 15px;border:5px;">
+                        <td  style = "width: 50%  ;padding: 15px;  font-size:13px;"><strong>Implementador:</strong> <t t-esc = "implementador"/></td>
+                        <td  style = "width: 50%  ;padding: 15px;  font-size:13px;"><strong>Fecha:</strong>   <t t-esc = "fecha"/></td>
+                    </tr>
+                </table>
+                <br> </br>
+
+                <div>
+                    <t t-if="total">
+                        <h6>Resumen Requerimientos</h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "proceso"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Aprobados:</strong> <span t-esc = "aprobado"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminados:</strong> <span t-esc = "terminados"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Cancelados:</strong> <span t-esc = "cancelados"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevos:</strong> <span t-esc = "nuevos"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Backlog:</strong> <span t-esc = "backlog"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Version Antigua:</strong>  <span t-esc = "antigua"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Deploy:</strong> <span t-esc = "deploy"/> </td>
+                            </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+
+                </div>
+                <div>
+                    <t t-if="total_task_d!=0">
+                        <h6>Resumen Tareas Desarrollo</h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total_task_d"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevas:</strong> <span t-esc = "new_d"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "on_process_d"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Interna:</strong> <span t-esc = "review_d"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Cliente:</strong> <span t-esc = "client_d"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminada:</strong> <span t-esc = "delivered_d"/> </td>
+                            </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+
+                </div>
+                <div>
+                    <t t-if="total_task_i!=0">
+                        <h6>Resumen Tareas Implementacion</h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total_task_i"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevas:</strong> <span t-esc = "new_i"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "on_process_i"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Interna:</strong> <span t-esc = "review_i"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Cliente:</strong> <span t-esc = "client_i"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminada:</strong> <span t-esc = "delivered_i"/> </td> </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+                </div>
+                <div>
+                    <t t-if="total_task_c!=0">
+                        <h6>Resumen Tareas Cliente</h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total_task_c"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevas:</strong> <span t-esc = "new_c"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "on_process_c"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Interna:</strong> <span t-esc = "review_c"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Cliente:</strong> <span t-esc = "client_c"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminada:</strong> <span t-esc = "delivered_c"/> </td> </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+                </div>
+                <div>
+                    <t t-if="total_task_t!=0">
+                        <h6>Resumen Tareas Ticket</h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total_task_t"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevas:</strong> <span t-esc = "new_t"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "on_process_t"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Interna:</strong> <span t-esc = "review_t"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Cliente:</strong> <span t-esc = "client_t"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminada:</strong> <span t-esc = "delivered_t"/> </td> </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+                </div>
+                <div>
+                    <t t-if="total_task_x!=0">
+                        <h6>Resumen Tareas </h6>
+                        <table style = "table-layout: fixed ;width: 100% ;border-spacing: 15px; ;">
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Total:</strong> <span t-esc = "total_task_x"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Nuevas:</strong> <span t-esc = "new_x"/></td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>En proceso:</strong> <span t-esc = "on_process_x"/> </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Interna:</strong> <span t-esc = "review_x"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Revision Cliente:</strong> <span t-esc = "client_x"/> </td>
+                                <td style="width: 50% ;padding: 10px;border-radius:10px;background-color:#d5d8dc;font-size:12px; "><strong>Terminada:</strong> <span t-esc = "delivered_x"/> </td> </tr>
+                        </table>
+
+                        <br> </br>
+                    </t>
+                </div>
+
+                <div style="page-break-before: always;">
+                    <t t-if="total!=0">
+                        <div>
+                            <h5 style="text-align: left;">Requerimientos </h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 12px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Requerimiento </th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">V</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Tipo de Solucion</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Fecha requerido</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Requerido por</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Fecha Aprobado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Aprobado por:</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Prioridad:</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Hrs. Plan:</th>
+                                    <th name="th_description" class="text-left" style="font-size: 12px">Hrs. Rea:</th>
+                                </tr>
+                                <t t-foreach="requerimientos" t-as="req">
+                                    <tr style=" border:1px;padding: 8px;">
+                                        <td class="text-left" ><span style="font-size: 12px" t-esc="req['No']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['name']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['state']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['version']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['solution_type']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['request_Date']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['requested_by']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['approved_date']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['approved_by_id']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['priority']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['planned_hours']"/></td>
+                                        <td class="text-left"><span style="font-size: 12px" t-esc="req['effective_hours']"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="total_task_d != 0">
+                        <div>
+                            <h5 style="text-align: left;">Tareas Desarrollo </h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 11px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Tarea </th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Responsable</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Plan</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Efect</th>
+                                </tr>
+                                <t t-foreach="task_d" t-as="tk_d">
+                                    <t t-if="tk_d['delay'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:red" t-esc="tk_d['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_d['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_d['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_d['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_d['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_d['effective_hours']"/></td>
+                                        </tr>
+
+
+                                    </t>
+                                    <t t-elif="tk_d['new'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:blue" t-esc="tk_d['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_d['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_d['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_d['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_d['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_d['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_d['client'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:#808b96" t-esc="tk_d['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_d['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_d['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_d['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_d['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_d['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px" t-esc="tk_d['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_d['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_d['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_d['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_d['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_d['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+
+
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="total_task_i != 0">
+                        <div>
+                            <h5 style="text-align: left;">Tareas Implementacion</h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 11px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Tarea </th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Responsable</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Plan</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Efect</th>
+                                </tr>
+                                <t t-foreach="task_i" t-as="tk_i">
+                                    <t t-if="tk_i['delay'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:red" t-esc="tk_i['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_i['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_i['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_i['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_i['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_i['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_i['new'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:blue" t-esc="tk_i['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_i['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_i['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_i['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_i['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_i['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_i['client'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:#808b96" t-esc="tk_i['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_i['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_i['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_i['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_i['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_i['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px" t-esc="tk_i['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_i['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_i['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_i['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_i['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_i['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="total_task_c != 0">
+                        <div>
+                            <h5 style="text-align: left;">Tareas Cliente</h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 11px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Tarea </th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Responsable</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Plan</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Efect</th>
+                                </tr>
+                                <t t-foreach="task_c" t-as="tk_c">
+                                    <t t-if="tk_c['delay'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:red" t-esc="tk_c['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_c['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_c['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_c['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_c['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_c['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_c['new'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:blue" t-esc="tk_c['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_c['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_c['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_c['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_c['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_c['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_c['client'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:#808b96" t-esc="tk_c['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_c['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_c['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_c['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_c['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_c['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px" t-esc="tk_c['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_c['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_c['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_c['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_c['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_c['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="total_task_t != 0">
+                        <div>
+                            <h5 style="text-align: left;">Tareas Ticket</h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 11px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Tarea </th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Responsable</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Plan</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Efect</th>
+                                </tr>
+                                <t t-foreach="task_t" t-as="tk_t">
+                                    <t t-if="tk_t['delay'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:red" t-esc="tk_t['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_t['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_t['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_t['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_t['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_t['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_t['new'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:blue" t-esc="tk_t['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_t['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_t['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_t['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_t['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_t['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_t['client'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:#808b96" t-esc="tk_t['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_t['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_t['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_t['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_t['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_t['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px" t-esc="tk_t['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_t['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_t['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_t['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_t['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_t['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                </t>
+                            </table>
+                        </div>
+                    </t>
+                    <t t-if="total_task_x != 0">
+                        <div>
+                            <h5 style="text-align: left;">Tareas </h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+
+                                    <th name="th_description" class="text-left" style="font-size: 11px">No.</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Tarea </th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Estado</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Responsable</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Plan</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">Hrs. Efect</th>
+                                </tr>
+                                <t t-foreach="task_x" t-as="tk_x">
+                                    <t t-if="tk_x['delay'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:red" t-esc="tk_x['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_x['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_x['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_x['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_x['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:red" t-esc="tk_x['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_x['new'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:blue" t-esc="tk_x['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_x['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_x['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_x['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_x['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:blue" t-esc="tk_x['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+                                    <t t-elif="tk_x['client'] == True">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px; color:#808b96" t-esc="tk_x['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_x['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_x['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_x['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_x['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px; color:#808b96" t-esc="tk_x['effective_hours']"/></td>
+                                        </tr>
+
+                                    </t>
+                                    <t t-else="">
+
+                                        <tr style=" border:1px;padding: 8px;">
+                                            <td class="text-left" ><span style="font-size: 11px" t-esc="tk_x['No']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_x['name']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_x['task_stage']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_x['user_id']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_x['planned_hours']"/></td>
+                                            <td class="text-left"><span style="font-size: 11px" t-esc="tk_x['effective_hours']"/></td>
+
+                                        </tr>
+
+                                    </t>
+
+                                </t>
+                            </table>
+                        </div>
+
+                        <div>
+                            <h5 style="text-align: left;">Codigo de colores </h5>
+                            <table class="table table-sm o_main_table">
+                                <tr style=" border:5px ;padding: 8px;border-spacing: 15px;">
+                                    <th name="th_description" class="text-left" style="font-size: 11px">COLOR</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">SIGNIFICADO</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">COLOR</th>
+                                    <th name="th_description" class="text-left" style="font-size: 11px">SIGNIFICADO</th>
+                                </tr>
+                                <tr style=" border:1px;padding: 8px;">
+                                    <td class="text-left" style="background-color:red;" > </td>
+                                    <td class="text-left" style="font-size: 9px">ATRASADA</td>
+                                    <td class="text-left" style="background-color:blue;" > </td>
+                                    <td class="text-left" style="font-size: 9px">NUEVA </td>
+
+                                </tr>
+                                <tr style=" border:1px;padding: 8px;">
+                                    <td class="text-left"  style="background-color:#808b96;"> </td>
+                                    <td class="text-left" style="font-size: 9px">REVISION CLIENTE </td>
+                                    <td class="text-left" style="background-color:black;" > </td>
+                                    <td class="text-left" style="font-size: 9px">NINGUNO DE LOS ANTERIORES </td>
+                                </tr>
+                            </table>
+                        </div>
+
+                    </t>
+                </div>
+
+            </t>
+        </t>
+    </template>
+
+</odoo>

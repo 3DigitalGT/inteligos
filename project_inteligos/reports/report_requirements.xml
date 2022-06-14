@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <!-- QWeb Reports -->
+    <report
+        id="report_project_details"
+        string="Reporte Requerimiento"
+        model="project.requirement"
+        report_type="qweb-pdf"
+        name="project_inteligos.report_details_card"
+        file="project_inteligos.report_details_card"/>
+
+
+</odoo>

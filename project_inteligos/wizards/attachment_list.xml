@@ -1,0 +1,25 @@
+<odoo>
+    <record model="ir.ui.view" id="wizard_attachment_form">
+        <field name="name">Attachment Form View</field>
+        <field name="model">project_inteligos.attachment_list_wiz</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form>
+                <h1>Archivos Adjuntos de la Tarea</h1>
+                <group>
+                    <group>
+                        <field name="task_id" invisible="1"/>
+                        <field name="qty"/>
+                    </group>
+
+                    <group>
+                        <field name="attachments"/>
+                    </group>
+                </group>
+                <footer class="oe_edit_only">
+                    <button string="Cerrar" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

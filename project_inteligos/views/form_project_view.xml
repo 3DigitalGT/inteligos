@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+
+    <record id="form_view_inherit" model="ir.ui.view">
+        <field name="name">Project Details View</field>
+        <field name="model">project.project</field>
+        <field name="type">form</field>
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+
+<!--                    <button name="print_report_complete" string='Sprints' type="object" class="oe_highlight"/>-->
+                    <button name="print_report_complete" string='Comunicaciones' type="object" class="oe_highlight"/>
+                    <button name="print_report_sprint" string="Sprint Report" type="object" class="oe_highlight"/>
+                    <button name="print_report_complete" string="General Report" type="object" class="oe_highlight"/>
+
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="open_project_requirements"
+                                type="object" class="oe_stat_button" icon="fa-file-text-o">
+                            <field  name="requirement_count" string="Requerimientos" widget="statinfo"/>
+                        </button>
+                        <button name="open_project_task"
+                                type="object" class="oe_stat_button" icon="fa-edit">
+                            <field  name="task_count" string="Tareas" widget="statinfo"/>
+                        </button>
+
+                        <button name="open_project_changes"
+                                type="object" class="oe_stat_button" icon="fa-exchange">
+                            <field  name="changes_count" string="Cambios" widget="statinfo"/>
+                        </button>
+                        <button name="open_project_sprints"
+                                type="object" class="oe_stat_button" icon="fa-list-alt">
+                            <field  name="sprint_count" string="Sprint" widget="statinfo"/>
+                        </button>
+
+                        <button name="open_project_minute"
+                                type="object" class="oe_stat_button" icon="fa-list-alt">
+                            <field  name="minute_count" string="Minute" widget="statinfo"/>
+                        </button>
+                    </div>
+
+
+
+
+                    <group>
+                        <group>
+                            <field name="display_name" readonly="1"/>
+                            <field name="user_id" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <group>
+                            <p style ="text-align: center;padding: 2px;border-radius:20px;background-color:#000000 ;margin-bottom: 10px;text-align: center;"><strong style="color: #ffffff ;font-size: 15px;">AVANCE REQUERIMIENTOS</strong></p>
+                        </group>
+                        <group>
+                            <p style ="text-align: center;padding: 2px;border-radius:20px;background-color:#000000 ;margin-bottom: 10px;text-align: center;"><strong style="color: #ffffff ;font-size: 15px;">ESTADO TAREAS</strong></p>
+                        </group>
+
+                    </group>
+                    <group>
+                        <group>
+                            <table style="width:100%;">
+
+
+                                <tr style="width:100%;">
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000 "><strong>% Avance</strong></td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><strong>% Avance</strong></td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><strong>% Avance</strong></td>
+                                </tr>
+                                <tr style="width:100%;">
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000">10</td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000">20</td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000 ">30</td>
+                                </tr>
+                                <tr style="width:100%;">
+                                    <td style="text-align: center">Semana Anterior</td>
+                                    <td style="text-align: center">Semana Actual </td>
+                                    <td style="text-align: center">Total</td>
+                                </tr>
+                            </table>
+                        </group>
+                        <group>
+                            <table style="width:100%;">
+
+
+
+
+                                <tr style="width:100%;">
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><field name="total_task"   readonly="1"/></td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><field name="total_backlog"  readonly="1"/></td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><field name="total_delivered"  readonly="1"/></td>
+                                    <td style="background-color:#abb2b9;text-align: center;font-size: 15px;color: #000000"><field name="total_delay"  readonly="1"/></td>
+                                </tr>
+
+                                <tr style="width:100%;">
+                                    <td style="text-align: center">Total </td>
+                                    <td style="text-align: center">Backlog</td>
+                                    <td style="text-align: center">Entregadas</td>
+                                    <td style="text-align: center">Atrasadas</td>
+                                    <td style="text-align: center">Salud Del Proyecto</td>
+                                </tr>
+                            </table>
+
+                        </group>
+
+                    </group>
+                </sheet>
+
+            </form>
+        </field>
+
+    </record>
+
+</odoo>

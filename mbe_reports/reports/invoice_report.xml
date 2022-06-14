@@ -17,22 +17,19 @@
         <field name="dpi">90</field>
     </record>
 
-<<<<<<< HEAD
-=======
     <!-- QWeb Reports -->
->>>>>>> a38d9cf73fb1a9f27acc1430896c2b34dbdb7ecd
     <record id="account_invoice_mbe" model="ir.actions.report">
         <field name="name">Factura MBE</field>
         <field name="model">account.move</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="report_name">mbe_logistics.report_invoice_mbe</field>
-        <field name="report_file">mbe_logistics.report_invoice_mbe</field>
+        <field name="report_name">mbe_reports.report_invoice_mbe</field>
+        <field name="report_file">mbe_reports.report_invoice_mbe</field>
         <field name="print_report_name">(object._get_report_base_filename())</field>
         <field name="attachment">(object.state == 'posted') and ((object.name or 'INV').replace('/','_')+'.pdf')</field>
-        <field name="binding_model_id" ref="model_account_move"/>
+<!--        <field name="binding_model_id" ref="model_account_move"/>-->
         <field name="binding_type">report</field>
-        <field name="groups_id" eval="[(4, ref('mbe_logistics.group_mbe_logistics_account_user'))]"/>
-        <field name="paperformat_id" ref="mbe_logistics.account_invoice_mbe_paper"/>
+<!--        <field name="groups_id" eval="[(4, ref('mbe_logistics.group_mbe_logistics_account_user'))]"/>-->
+        <field name="paperformat_id" ref="mbe_reports.account_invoice_mbe_paper"/>
     </record>
 
 </odoo>
