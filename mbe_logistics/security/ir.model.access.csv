@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_logistics_package,Acceso total a Paquetes,model_mbe_logistics_package,mbe_logistics.group_mbe_logistics_manager,1,1,1,1
+access_all_logistics_manifest,Acceso total a Manifiestos,model_mbe_logistics_manifest,mbe_logistics.group_mbe_logistics_manager,1,1,1,1
+access_user_logistics_package,Acceso de usuario a Paquetes,model_mbe_logistics_package,mbe_logistics.group_mbe_logistics_user,1,0,0,0
+access_user_logistics_manifest,Acceso de usuario a Manifiestos,model_mbe_logistics_manifest,mbe_logistics.group_mbe_logistics_user,1,0,0,0
+access_account_user_logistics_package,Acceso de usuario contable a Paquetes,model_mbe_logistics_package,mbe_logistics.group_mbe_logistics_account_user,1,1,0,0
+access_account_user_logistics_manifest,Acceso de usuario contable a Manifiestos,model_mbe_logistics_manifest,mbe_logistics.group_mbe_logistics_account_user,1,1,0,0
+access_all_shipping_cost,Acceso total a Gastos,model_shipping_cost,mbe_logistics.group_mbe_logistics_manager,1,1,1,1
+

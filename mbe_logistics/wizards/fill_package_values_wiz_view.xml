@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="bank_reconciliation_wizard_view" model="ir.ui.view">
+        <field name="name">Vista Formulario Wizard - Conciliación Bancaria</field>
+        <field name="model">l10n_gt_bank_reconciliation.report_wiz</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Seleccione un Diario y Rango de Fecha">
+                <group name="filters_report">
+                    <group name="journal">
+                        <field name="journal_id"/>
+                        <field name="type" string="Tipo Reporte" widget='radio'/>
+                    </group>
+
+                    <group name="date_range">
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                    </group>
+                </group>
+
+                <footer>
+                    <button name="action_print_pdf_report" string="Generar" type="object" class="btn-primary"
+                            attrs="{'invisible': [('type', '!=', 'basic')]}"/>
+                    <button name="action_generate_excel" string="Generar XLS" type="object" class="btn-primary"/>
+                    <button special="cancel" string="Cancelar" class="oe_link"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="bank_reconciliation_report_wizard" model="ir.actions.act_window">
+        <field name="name">Reporte Conciliación Bancaria</field>
+        <field name="res_model">l10n_gt_bank_reconciliation.report_wiz</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem action="bank_reconciliation_report_wizard"
+              id="bank_reconciliation_menu"
+              parent="account_reports.account_reports_audit_reports_menu"
+              name="Conciliacion Bancaria"/>
+
+</odoo>
