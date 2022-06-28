@@ -1,0 +1,177 @@
+<odoo>
+
+    <record model="ir.ui.view" id="manifest_list_view">
+        <field name="name">Vista Lista - Manifiesto</field>
+        <field name="model">mbe_logistics.manifest</field>
+        <field name="arch" type="xml">
+            <tree string="Manifiesto" name="list_manifest">
+                <field name="name"/>
+                <field name="reference"/>
+                <field name="state"/>
+                <field name="supplier_id"/>
+                <field name="carrier_id"/>
+                <field name="guide_bl"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_filter_manifest" model="ir.ui.view">
+        <field name="name">Vista Búsqueda - Manifiesto</field>
+        <field name="model">mbe_logistics.manifest</field>
+        <field name="arch" type="xml">
+            <search string="Búsqueda Manifiesto">
+                <field name="name" filter_domain="[('search_date','ilike',self)]"/>
+                <field name="supplier_id"/>
+                <field name="carrier_id"/>
+                <field name="reference" filter_domain="[('search_date','ilike',self)]"/>
+        </search>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="manifest_form_view">
+        <field name="name">Vista Formulario - Manifiesto</field>
+        <field name="model">mbe_logistics.manifest</field>
+        <field name="arch" type="xml">
+            <form string="Manifiesto" name="form_manifest">
+                <header name="header_manifest">
+                  <field name="state" widget="statusbar" statusbar_visible="prepared,in_transit,customs,in_warehouse"/>
+                </header>
+
+                <sheet name="sheet_manifest">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="supplier_id"/>
+                            <field name="carrier_id"/>
+                            <field name="currency_id" readonly="0"/>
+                            <field name="reference"/>
+                            <field name="guide_bl"/>
+                        </group>
+
+                        <group>
+                            <field name="prepared_date"/>
+                            <field name="dispatch_date"/>
+                            <field name="exchange_rate"/>
+                        </group>
+                    </group>
+
+                    <notebook name="notebook_manifests">
+                        <page string="Paquetes" name="packages">
+                            <field name="package_ids">
+                                <tree string="Paquetes" editable="bottom" name="packages"
+                                      context="{'default_carrier_name': active_id.carrier_id.name}">
+                                    <field name="name"/>
+                                    <field name="skybox" optional="hide"/>
+                                    <field name="description" optional="show"/>
+                                    <field name="qty" optional="show"/>
+                                    <field name="weight" optional="show"/>
+                                    <field name="weight_grams" optional="show"/>
+                                    <field name="weight_pounds" optional="show"/>
+                                    <field name="freight" optional="show"/>
+                                    <field name="dai" optional="show" widget="monetary"/>
+                                    <field name="iva" optional="show" widget="monetary"/>
+                                    <field name="value" optional="show" widget="monetary"/>
+                                    <field name="value_gt" optional="show" widget="monetary"/>
+                                    <field name="supplier_name" optional="hide"/>
+                                    <field name="tracking" optional="show"/>
+                                    <field name="carrier_name" optional="hide"/>
+                                    <field name="mawb" optional="hide"/>
+                                    <field name="sky_store" optional="hide"/>
+                                    <field name="sky_way_no" optional="hide"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="expenses" optional="hide" widget="monetary"/>
+                                    <field name="custom_expenses" optional="hide" widget="monetary"/>
+                                    <field name="state" readonly="0" optional="hide"/>
+                                    <field name="length" optional="hide"/>
+                                    <field name="width" optional="hide"/>
+                                    <field name="height" optional="hide"/>
+                                    <field name="dimensions" optional="hide"/>
+                                    <field name="documentation" optional="hide"/>
+                                    <field name="manifest_id" invisible="1" context="{'id': parent.id}"/>
+                                </tree>
+                            </field>
+                        </page>
+
+                        <page string="Gastos" name="expenses">
+                            <field name="shipping_cost_ids">
+                                <tree string="Gastos" editable="bottom">
+                                    <field name="product_id" domain="[('landed_cost_ok', '=', True)]"
+                                           context="{'default_landed_cost_ok': True}"/>
+                                    <field name="name"/>
+                                    <field name="price_usd"/>
+                                    <field name="price_unit"/>
+                                    <field name="manifest_id" invisible="1" context="{'id': parent.id}"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+     <record model="ir.ui.view" id="manifest_kanban_view">
+         <field name="name">Vista Kanban - Manifiesto</field>
+         <field name="model">mbe_logistics.manifest</field>
+         <field name="type">kanban</field>
+         <field name="arch" type="xml">
+             <kanban default_group_by="state" class="o_kanban_small_column o_kanban_project_tasks o_kanban_mobile">
+                 <field name="name" />
+                 <field name="supplier_id" />
+                 <field name="carrier_id" />
+                 <field name="guide_bl" />
+                 <field name="reference" />
+                 <field name="dispatch_date" />
+                 <templates>
+                 <t t-name="kanban-box">
+                     <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                        <div class="row o_kanban_card_content">
+                            <div class="oe_kanban_details col-12 o_kanban_primary_right ml-2" style="margin-right: 0px;">
+                                 <group>
+                                     <div class="oe_product_desc">
+                                     <field name="name"/>
+                                         <div><strong>Proveedor:</strong><br/><field name="supplier_id"/></div>
+                                         <div><strong>Transportista:</strong><br/><field name="carrier_id"/></div>
+                                         <div><strong>Guía/BL</strong><br/><field name="guide_bl"/></div>
+                                         <div><strong>Referencia</strong><br/><field name="reference"/></div>
+                                         <div><strong>Fecha Recogida/Envio</strong><br/><field name="dispatch_date"/></div>
+                                    </div>
+                                 </group>
+                            </div>
+                        </div>
+                     </div>
+                 </t>
+                 </templates>
+             </kanban>
+         </field>
+     </record>
+
+    <record model="ir.actions.act_window" id="manifest_action_window">
+        <field name="name">Manifiesto</field>
+        <field name="res_model">mbe_logistics.manifest</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear un nuevo Manifiesto
+            </p><p>
+               Modelo utilizado para almacenar los manifiestos conteniendo la descripcion de todos los productos
+            </p>
+        </field>
+    </record>
+
+    <menuitem name="Manifiesto" id="mbe_logistics.menu_manifest_list"
+              parent="mbe_logistics.menu_logistics_manifest"
+              sequence="3" action="mbe_logistics.manifest_action_window"/>
+
+</odoo>

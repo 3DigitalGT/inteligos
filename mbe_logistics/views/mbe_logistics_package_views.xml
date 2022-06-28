@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="package_list_view">
+            <field name="name">Vista Lista - Paquetes</field>
+            <field name="model">mbe_logistics.package</field>
+            <field name="arch" type="xml">
+                <tree name="list_package">
+                    <button name="action_fill_package_values" type="object"
+                            groups="mbe_logistics.group_mbe_logistics_user"
+                            icon="fa-file-circle-info"/>
+                    <field name="sale_order_id" invisible="1"/>
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="skybox" optional="show"/>
+                    <field name="weight" optional="show"/>
+                    <field name="weight_grams" optional="show"/>
+                    <field name="weight_pounds" optional="show"/>
+                    <field name="freight" optional="show"/>
+                    <field name="tracking" optional="show"/>
+                    <field name="dai" optional="show" widget="monetary"/>
+                    <field name="iva" optional="show" widget="monetary"/>
+                    <field name="custom_expenses" optional="show" widget="monetary"/>
+                    <field name="qty"/>
+                    <field name="value" optional="show" widget="monetary"/>
+                    <field name="value_gt" optional="show" widget="monetary"/>
+                    <field name="expenses" optional="show" widget="monetary"/>
+                    <field name="state" optional="show"/>
+                    <field name="currency_id" optional="show" invisible="1"/>
+                    <field name="manifest_id" invisible="1"/>
+                    <field name="supplier_name" optional="show"/>
+                    <field name="carrier_name" optional="show"/>
+                    <field name="mawb" optional="show"/>
+                    <field name="sky_store" optional="show"/>
+                </tree>
+            </field>
+    </record>
+
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="package_action_window">
+        <field name="name">Paquetes</field>
+        <field name="res_model">mbe_logistics.package</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crear nuevos paquetes
+            </p><p>
+               modelo que almacena los productos y datos obtenidos relacionados a ellos.
+            </p>
+        </field>
+    </record>
+
+    <!-- menu -->
+    <menuitem name="Paquetes" id="mbe_logistics.menu_package_list" parent="mbe_logistics.menu_logistics_package"
+              sequence="0" action="mbe_logistics.package_action_window"/>
+
+</odoo>

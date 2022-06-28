@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_company_form">
+        <field name="name">Herencia de vista formulario compañía para logística</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+        <xpath expr="//notebook[@colspan='4']" position="inside">
+            <page string="Logística" groups="mbe_logistics.group_mbe_logistics_manager">
+                <group>
+                    <group>
+                        <field name="logistic_weight_id"/>
+                        <field name="logistic_clearance_id"/>
+                        <field name="logistic_employed_id"/>
+                    </group>
+
+                    <group>
+                        <field name="logistic_weight_factor"/>
+                        <field name="logistic_admin_expenses_id"/>
+                        <field name="journal_receipt_employed_id"/>
+                    </group>
+                </group>
+            </page>
+        </xpath>
+        </field>
+    </record>
+
+</odoo>

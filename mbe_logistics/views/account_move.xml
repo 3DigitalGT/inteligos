@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_move_form">
+        <field name="name">Herencia de vista formulario de asiento contable para logística</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <field name="ref" position="after">
+                <field name="receipt_id" attrs="{'invisible': [('receipt_id', '=', False)]}" readonly="1"
+                       groups="mbe_logistics.group_mbe_logistics_account_user"/>
+            </field>
+
+            <field name="amount_total" position="after">
+                <field name="total_logistic" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" widget="monetary"/>
+                <field name="logistic_employed_iva" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
+                <field name="logistic_employed_dai" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
+                <field name="logistic_employed_others" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
+                <field name="logistic_employed" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
