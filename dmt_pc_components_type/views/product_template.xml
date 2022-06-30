@@ -5,12 +5,8 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_form_view" />
             <field name="arch" type="xml">
-                <field name="detailed_type" position="after">
-                    <field name="is_computer"/>
-                </field>
                 <xpath expr="//sheet/notebook/page[@name='purchase']" position="after">
-                    <field name="is_computer" invisible="1"/>
-                    <page string="Informacion Computo" attrs="{'invisible': [('is_computer','=',False)]}">
+                    <page string="Referencias">
                         <group>
                             <group string="Procesador">
                                 <field name="processor_type"/>
@@ -19,6 +15,21 @@
                             <group string="Memoria RAM">
                                 <field name="ram_type"/>
                                 <field name="ram_capacity" attrs="{'invisible': [('ram_type','=',False)]}"/>
+                            </group>
+                            <group string="Monitor">
+                                <field name="monitor_size"/>
+                                <field name="monitor_type"/>
+                            </group>
+                            <group string="Accesorios">
+                                <field name="mouse"/>
+                                <field name="keyboard"/>
+                                <field name="video_cable"/>
+                                <field name="power_cable"/>
+                            </group>
+                            <group string="Hardware">
+                                <field name="speakers"/>
+                                <field name="printer"/>
+                                <field name="ups"/>
                             </group>
                         </group>
                     </page>
