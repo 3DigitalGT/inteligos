@@ -34,6 +34,13 @@ class ProductTemplateInherit(Model):
                                ('eleventh_gen', '11G'),
                                ], string='Generacion de procesador')
 
+    processor_frequency = Selection([('2.4', '2.4GHz'),
+                                     ('3.0', '3.0GHz'),
+                                     ('3.2', '3.2GHz'),
+                                     ('3.5', '3.5GHz'),
+                                     ('4.2', '4.2GHz'),
+                                     ], string='Velocidad del procesador')
+
     ram_type = Selection([('sdram', 'SDRAM'),
                           ('ddr_one', 'DDR1'),
                           ('ddr_two', 'DDR2'),
@@ -42,29 +49,27 @@ class ProductTemplateInherit(Model):
                           ('ddr_five', 'DDR5')
                           ], string='Tipo de RAM')
 
-    ram_capacity = Selection([('2gb', '2GB'),
-                              ('4gb', '4GB'),
-                              ('8gb', '8GB'),
-                              ('16gb', '16GB'),
-                              ('32gb', '32GB'),
-                              ('64gb', '64GB'),
-                              ('128gb', '128GB'),
-                              ], string='Capacidad de RAM')
+    ram_frequency = Selection([('400', '400 MHz'),
+                               ('1.066', '1.066 MHz'),
+                               ('2.4', '2.4 MHz'),
+                               ('3', '3 MHz'),
+                               ('4', '4 MHz'),
+                               ], string='Tipo de RAM')
 
-    monitor_size = Selection([('17pulg', '17 Pulg'),
-                              ('19pulg', '19 Pulg'),
-                              ('20pulg', '20 Pulg'),
-                              ('21pulg', '21 Pulg'),
-                              ('22pulg', '22 Pulg'),
-                              ('23pulg', '23 Pulg'),
-                              ('24pulg', '24 Pulg'),
-                              ('25pulg', '25 Pulg'),
-                              ('26pulg', '26 Pulg'),
-                              ('27pulg', '27 Pulg'),
+    monitor_size = Selection([('17pulg', '17'),
+                              ('19pulg', '19'),
+                              ('20pulg', '20'),
+                              ('21pulg', '21'),
+                              ('22pulg', '22'),
+                              ('23pulg', '23'),
+                              ('24pulg', '24'),
+                              ('25pulg', '25'),
+                              ('26pulg', '26'),
+                              ('27pulg', '27'),
                               ], string='Tamaño de monitor')
 
-    monitor_type = Selection([('square', 'Cuadrado'),
-                              ('wide', 'Wide'),
+    monitor_type = Selection([('square', 'C'),
+                              ('wide', 'W'),
                               ], string='Tipo de Monitor')
 
     mouse = Selection([('new', 'N'),

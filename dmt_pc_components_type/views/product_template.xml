@@ -10,11 +10,11 @@
                         <group>
                             <group string="Procesador">
                                 <field name="processor_type"/>
-                                <field name="processor_gen" attrs="{'invisible': [('processor_type','=',False)]}"/>
+                                <field name="processor_frequency" attrs="{'invisible': [('processor_type','=',False)]}"/>
                             </group>
                             <group string="Memoria RAM">
                                 <field name="ram_type"/>
-                                <field name="ram_capacity" attrs="{'invisible': [('ram_type','=',False)]}"/>
+                                <field name="ram_frequency" attrs="{'invisible': [('ram_type','=',False)]}"/>
                             </group>
                             <group string="Monitor">
                                 <field name="monitor_size"/>
