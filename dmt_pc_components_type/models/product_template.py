@@ -54,7 +54,7 @@ class ProductTemplateInherit(Model):
                                ('2.4', '2.4 MHz'),
                                ('3', '3 MHz'),
                                ('4', '4 MHz'),
-                               ], string='Tipo de RAM')
+                               ], string='Frecuencia de RAM')
 
     monitor_size = Selection([('17pulg', '17'),
                               ('19pulg', '19'),
