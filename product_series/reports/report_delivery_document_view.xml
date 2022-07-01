@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <template id="report_delivery_document_with_series" inherit_id="stock.report_delivery_document" priority="2">
+        <xpath expr="//table[@name='stock_move_line_table']/tbody" position="inside">
+            <tr style="border-top:1rem solid black; border-bottom:1rem solid black;">
+                <td name="series" colspan="6" style="height:40px; border-top:1px solid black;">
+                    <t t-foreach="move_line.move_id.series_ids" t-as="series">
+                        <span t-field="series.name"/>,
+                    </t>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+
+</odoo>

@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_all_product_series_manager,Acceso total a las series de productos,model_product_series,stock.group_stock_user,1,1,1,1
