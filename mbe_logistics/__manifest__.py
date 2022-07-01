@@ -7,7 +7,7 @@
     'description': """
        Logística de importaciones, pedidos de ventas y facturación MBE Guatemala.
     """,
-    'author': "Intéligos, S. A.",
+    'author': "Inteligos, S.A.",
     'website': "https://www.inteligos.gt",
     'category': 'Operations',
     'version': '0.1',
