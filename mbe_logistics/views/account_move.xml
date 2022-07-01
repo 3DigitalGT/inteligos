@@ -12,7 +12,7 @@
                        groups="mbe_logistics.group_mbe_view_account_sale_order_package"/>
             </field>
 
-            <field name="amount_total" position="after">
+            <field name="tax_totals_json" position="after">
                 <field name="total_logistic" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" widget="monetary"/>
                 <field name="logistic_employed_iva" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
                 <field name="logistic_employed_dai" attrs="{'invisible': [('logistic_employed', '=', 0.00)]}" readonly="1" widget="monetary"/>
