@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <field name="ref" position="after">
                 <field name="receipt_id" attrs="{'invisible': [('receipt_id', '=', False)]}" readonly="1"
-                       groups="mbe_logistics.group_mbe_logistics_account_user"/>
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package"/>
             </field>
 
             <field name="amount_total" position="after">

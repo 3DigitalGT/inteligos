@@ -7,4 +7,3 @@ access_account_user_logistics_package,Acceso de usuario contable a Paquetes,mode
 access_account_user_logistics_manifest,Acceso de usuario contable a Manifiestos,model_mbe_logistics_manifest,mbe_logistics.group_mbe_logistics_account_user,1,1,0,0
 access_all_shipping_cost,Acceso total a Gastos,model_shipping_cost,mbe_logistics.group_mbe_logistics_manager,1,1,1,1
 access_fill_package_values_wiz,Acceso al llenado de paquetes por gastos,model_fill_package_values_wiz,mbe_logistics.group_mbe_logistics_user,1,1,1,1
-

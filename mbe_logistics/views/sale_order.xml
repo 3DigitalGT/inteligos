@@ -8,7 +8,7 @@
         <field name="type">form</field>
         <field name="arch" type="xml">
             <xpath expr="//notebook" position="inside">
-                <page string="Paquetes" attrs="{'invisible': [('package_ids', '=', False)]}" groups="mbe_logistics.group_mbe_logistics_account_user">
+                <page string="Paquetes" attrs="{'invisible': [('package_ids', '=', False)]}" groups="mbe_logistics.group_mbe_view_account_sale_order_package">
                     <field name="package_ids" attrs="{'invisible': [('package_ids', '=', False)]}">
                         <tree string="Paquetes" delete="0" editable="bottom" name="package">
                             <field name="name"/>
@@ -29,19 +29,26 @@
 
             <xpath expr="//header" position="inside">
                 <button name="action_get_packages" type="object" string="Obtener Paquetes" class="oe_highlight"
-                        groups="mbe_logistics.group_mbe_logistics_account_user"/>
+                        groups="mbe_logistics.group_mbe_view_account_sale_order_package"
+                        attrs="{'invisible':[('state', '!=', 'draft')]}"/>
                 <button name="action_unlink_packages" string="Quitar Paquetes" type="object" icon="fa-ban"
-                        groups="mbe_logistics.group_mbe_logistics_account_user"
+                        groups="mbe_logistics.group_mbe_view_account_sale_order_package"
                         attrs="{'invisible':[('state', '!=', 'draft')]}"/>
             </xpath>
 
             <field name="tax_totals_json" position="after">
-                <field name="total_logistic" attrs="{'invisible': [('package_ids', '=', False)]}" string="Gran Total" widget="monetary"/>
-                <field name="logistic_employed_iva" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
-                <field name="logistic_employed_dai" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
-                <field name="logistic_employed_others" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
-                <field name="logistic_employed" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
-                <field name="total_cif" attrs="{'invisible': [('package_ids', '=', False)]}" readonly="1" widget="monetary"/>
+                <field name="total_logistic" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" string="Gran Total" widget="monetary"/>
+                <field name="logistic_employed_iva" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" readonly="1" widget="monetary"/>
+                <field name="logistic_employed_dai" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" readonly="1" widget="monetary"/>
+                <field name="logistic_employed_others" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" readonly="1" widget="monetary"/>
+                <field name="logistic_employed" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" readonly="1" widget="monetary"/>
+                <field name="total_cif" attrs="{'invisible': [('package_ids', '=', False)]}"
+                       groups="mbe_logistics.group_mbe_view_account_sale_order_package" readonly="1" widget="monetary"/>
             </field>
         </field>
     </record>
