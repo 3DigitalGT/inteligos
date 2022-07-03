@@ -261,9 +261,9 @@ class InheritSaleOrderLogistic(Model):
                     'price_unit': self.logistic_employed,
                     'tax_ids': [(6, 0, self.env.company.logistic_employed_id.taxes_id.ids)],
                     'analytic_account_id': self.analytic_account_id.id,
-                    'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids) for line in self.order_line],
-                    'sale_line_ids': [(4, line.id) for line in self.order_line]
-                })]
+                    'analytic_tag_ids': [(6, 0, line.analytic_tag_ids.ids) for line in self.order_line]
+                })]  # # TODO: FIX me when add sale_line_ids field with relation records Odoo fix him. Odoo error inside sale module, on action_post method. Bad use for records.
+            # # TODO: Error: singleton. Code error: line.sale_line_ids.is_downpayment, line.sale_line_ids.tax_id, line.sale_line_ids.price_unit, line.sale_line_ids.untaxed_amount_to_invoice
 
             receipt = self.env['account.move'].sudo().create(invoice_vals)
 
