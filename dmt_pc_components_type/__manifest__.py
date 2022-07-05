@@ -5,7 +5,7 @@
         Tipo de componentes para pc""",
     'description': """
         Este modulo sirve para agregar toda la informacion pertinente 
-        a los componentes de una PC de DMT
+        a los componentes de una PC de DMT, ademas de las referencias internas
     """,
     'author': "Inteligos, S.A.",
     'website': "https://www.inteligos.gt/",
@@ -20,5 +20,6 @@
 
     'data': [
         'views/product_template.xml',
+        'views/pc_accessories.xml'
     ],
 }

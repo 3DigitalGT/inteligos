@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo.models import Model
-from odoo.fields import Selection, Boolean
+from odoo.fields import Selection, Boolean, Char, Many2many
+from odoo.api import model
 
 
 class ProductTemplateInherit(Model):
@@ -10,89 +11,111 @@ class ProductTemplateInherit(Model):
 
     is_computer = Boolean(string='Es Computadora', default=False)
 
-    processor_type = Selection([('celeron', 'Celeron'),
-                                ('core_2_duo', 'C2D'),
-                                ('core_i3', 'CI3'),
-                                ('core_i5', 'CI5'),
-                                ('core_i7', 'CI7'),
-                                ('core_i9', 'CI9'),
-                                ('amd_ryzen_3', 'AMD/R3'),
-                                ('amd_ryzen_5', 'AMD/R5'),
-                                ('amd_ryzen_7', 'AMD/R7'),
+    processor_type = Selection([('CEL', 'CEL'),
+                                ('C2D', 'C2D'),
+                                ('CI3', 'CI3'),
+                                ('CI5', 'CI5'),
+                                ('CI7', 'CI7'),
+                                ('CI9', 'CI9'),
+                                ('AMD/R3', 'AMD/R3'),
+                                ('AMD/R5', 'AMD/R5'),
+                                ('AMD/R7', 'AMD/R7'),
                                 ], string='Procesador')
 
-    processor_gen = Selection([('first_gen', '1G'),
-                               ('second_gen', '2G'),
-                               ('third_gen', '3G'),
-                               ('fourth_gen', '4G'),
-                               ('fifth_gen', '5G'),
-                               ('sixth_gen', '6G'),
-                               ('seventh_gen', '7G'),
-                               ('eighth_gen', '8G'),
-                               ('ninth_gen', '9G'),
-                               ('tenth_gen', '10G'),
-                               ('eleventh_gen', '11G'),
+    processor_gen = Selection([('1G', '1G'),
+                               ('2G', '2G'),
+                               ('3G', '3G'),
+                               ('4G', '4G'),
+                               ('5G', '5G'),
+                               ('6G', '6G'),
+                               ('7G', '7G'),
+                               ('8G', '8G'),
+                               ('9G', '9G'),
+                               ('10G', '10G'),
+                               ('11G', '11G'),
                                ], string='Generacion de procesador')
 
-    processor_frequency = Selection([('2.4', '2.4GHz'),
-                                     ('3.0', '3.0GHz'),
-                                     ('3.2', '3.2GHz'),
-                                     ('3.5', '3.5GHz'),
-                                     ('4.2', '4.2GHz'),
+    processor_frequency = Selection([('LR', 'LR'),
+                                     ('MR', 'MR'),
+                                     ('HR', 'HR'),
+
                                      ], string='Velocidad del procesador')
 
-    ram_type = Selection([('sdram', 'SDRAM'),
-                          ('ddr_one', 'DDR1'),
-                          ('ddr_two', 'DDR2'),
-                          ('ddr_three', 'DDR3'),
-                          ('ddr_four', 'DDR4'),
-                          ('ddr_five', 'DDR5')
+    ram_type = Selection([('SDRAM', 'SDRAM'),
+                          ('DDR1', 'DDR1'),
+                          ('DDR2', 'DDR2'),
+                          ('DDR3', 'DDR3'),
+                          ('DDR4', 'DDR4'),
+                          ('DDR5', 'DDR5')
                           ], string='Tipo de RAM')
 
-    ram_frequency = Selection([('400', '400 MHz'),
-                               ('1.066', '1.066 MHz'),
-                               ('2.4', '2.4 MHz'),
-                               ('3', '3 MHz'),
-                               ('4', '4 MHz'),
-                               ], string='Frecuencia de RAM')
-
-    monitor_size = Selection([('17pulg', '17'),
-                              ('19pulg', '19'),
-                              ('20pulg', '20'),
-                              ('21pulg', '21'),
-                              ('22pulg', '22'),
-                              ('23pulg', '23'),
-                              ('24pulg', '24'),
-                              ('25pulg', '25'),
-                              ('26pulg', '26'),
-                              ('27pulg', '27'),
+    monitor_size = Selection([('17', '17'),
+                              ('19', '19'),
+                              ('20', '20'),
+                              ('21', '21'),
+                              ('22', '22'),
+                              ('23', '23'),
+                              ('24', '24'),
+                              ('25', '25'),
+                              ('26', '26'),
+                              ('27', '27'),
                               ], string='Tamaño de monitor')
 
     monitor_type = Selection([('square', 'C'),
                               ('wide', 'W'),
-                              ], string='Tipo de Monitor')
+                              ], string='Tipo de monitor')
 
-    mouse = Selection([('new', 'N'),
-                       ('reusable', 'R'),
-                       ], string='Mouse')
+    monitor_grade = Selection([('A', 'A'),
+                               ('B', 'B'),
+                               ('C', 'C'),
+                               ], string='Grado del monitor')
+    accesories = Many2many(comodel_name='pc.accessories', string='Accesorios')
+    # mouse = Selection([('new', 'N'),
+    #                    ('reusable', 'R'),
+    #                    ], string='Mouse')
+    #
+    # keyboard = Selection([('new', 'N'),
+    #                       ('reusable', 'R'),
+    #                       ], string='Teclado')
+    #
+    # video_cable = Selection([('new', 'N'),
+    #                          ('reusable', 'R'),
+    #                          ], string='Cable de Video')
+    #
+    # power_cable = Selection([('new', 'N'),
+    #                          ('reusable', 'R'),
+    #                          ], string='Cable de Poder')
+    #
+    # speakers = Selection([('new', 'N'),
+    #                       ], string='Bocina')
+    #
+    # printer = Selection([('new', 'N'),
+    #                      ], string='Impresora')
+    #
+    # ups = Selection([('new', 'N'),
+    #                  ], string='UPS')
 
-    keyboard = Selection([('new', 'N'),
-                          ('reusable', 'R'),
-                          ], string='Teclado')
+    computer_brand = Selection([('DE', 'DE'),
+                                ('HP', 'HP'),
+                                ('MM', 'MM'),
+                                ], string='Marca Computador')
 
-    video_cable = Selection([('new', 'N'),
-                             ('reusable', 'R'),
-                             ], string='Cable de Video')
+    computer_size = Selection([('SFF', 'SFF'),
+                               ('MD', 'MD'),
+                               ('D', 'D'),
+                               ('T', 'T'),
+                               ], string='Tamaño computador')
 
-    power_cable = Selection([('new', 'N'),
-                             ('reusable', 'R'),
-                             ], string='Cable de Poder')
+    internal_reference = Char(string='Referencia interna')
 
-    speakers = Selection([('new', 'N'),
-                          ], string='Bocina')
-
-    printer = Selection([('new', 'N'),
-                         ], string='Impresora')
-
-    ups = Selection([('new', 'N'),
-                     ], string='UPS')
+    @model
+    def create(self, vals):
+        """Sobrescritura del método genérico de Odoo para la creación de registros product.tempalte.
+            para asignar una secuencia[Correlativo] a los productos creados.
+        """
+        # ToDo: Marca/Procesador/Velocidad/Tamaño/Tipoderam/secuencianumerica
+        code = len(self.env['product.template'].search([]))
+        vals['internal_reference'] = str(vals['computer_brand']) + str(vals['processor_type']) + str(
+            vals['processor_frequency']) + str(vals['computer_size']) + str(vals['ram_type']) + str(code)
+        result = super(ProductTemplateInherit, self).create(vals)
+        return result

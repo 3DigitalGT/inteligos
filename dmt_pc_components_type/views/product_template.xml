@@ -8,28 +8,26 @@
                 <xpath expr="//sheet/notebook/page[@name='purchase']" position="after">
                     <page string="Referencias">
                         <group>
+                            <group string="REFERENCIA INTERNA">
+                                <field name="internal_reference"/>
+                            </group>
+                            <group string="Marca Computador">
+                                <field name="computer_brand"/>
+                            </group>
                             <group string="Procesador">
                                 <field name="processor_type"/>
                                 <field name="processor_frequency" attrs="{'invisible': [('processor_type','=',False)]}"/>
+                                <field name="computer_size"/>
                             </group>
                             <group string="Memoria RAM">
                                 <field name="ram_type"/>
-                                <field name="ram_frequency" attrs="{'invisible': [('ram_type','=',False)]}"/>
                             </group>
                             <group string="Monitor">
                                 <field name="monitor_size"/>
                                 <field name="monitor_type"/>
                             </group>
                             <group string="Accesorios">
-                                <field name="mouse"/>
-                                <field name="keyboard"/>
-                                <field name="video_cable"/>
-                                <field name="power_cable"/>
-                            </group>
-                            <group string="Hardware">
-                                <field name="speakers"/>
-                                <field name="printer"/>
-                                <field name="ups"/>
+                                <field name="accesories" widget="many2many_tags" options="{'no_create_edit':'1'}"/>
                             </group>
                         </group>
                     </page>

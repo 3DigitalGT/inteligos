@@ -1,0 +1,44 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_form_components">
+            <field name="name">Configuracion PC accesorios</field>
+            <field name="model">pc.accessories</field>
+            <field name="arch" type="xml">
+                <form string="Informes" create="false">
+                    <sheet>
+                        <field name="name"/>
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+    </data>
+    <data>
+        <record model="ir.ui.view" id="view_tree_components">
+            <field name="name">Configuracion PC accesorios lista</field>
+            <field name="model">pc.accessories</field>
+            <field name="arch" type="xml">
+                <tree string="Informes" create="false">
+                        <field name="name"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+    <data>
+        <record id="action_form_view_accessories" model="ir.actions.act_window">
+            <field name="name">PC accesorios</field>
+            <field name="res_model">pc.accessories</field>
+            <field name="view_mode">tree,form</field>
+            <field name="target">current</field>
+        </record>
+
+        <menuitem id="menu_pc_accessories_parent"
+                  parent="sale.product_menu_catalog"
+                  name="PC accesorios"/>
+
+        <menuitem id="menu_pc_accessories"
+                  action="action_form_view_accessories"
+                  parent="menu_pc_accessories_parent"
+                  name="Accesorios "/>
+    </data>
+</odoo>
