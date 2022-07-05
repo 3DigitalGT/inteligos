@@ -18,7 +18,7 @@
             <field name="name">Configuracion PC accesorios lista</field>
             <field name="model">pc.accessories</field>
             <field name="arch" type="xml">
-                <tree string="Informes" create="false">
+                <tree string="Accesorios">
                         <field name="name"/>
                 </tree>
             </field>
