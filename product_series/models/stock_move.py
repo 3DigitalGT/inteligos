@@ -75,9 +75,10 @@ class StockMoveInherited(Model):
         Sobrescritura al método genérico para eiminar las series enlazadas al movimiento.
         :return: valor genérico devuelto por Odoo.
         """
-        result = super(StockMoveInherited, self)._action_cancel()
-        product_series = self.env['product.series'].search([('stock_move_id', '=', self.id)])
+        for record in self:
+            result = super(StockMoveInherited, record)._action_cancel()
+            product_series = record.env['product.series'].search([('stock_move_id', '=', record.id)])
 
-        for series in product_series:
-            series.unlink()
-        return result
+            for series in product_series:
+                series.unlink()
+            return result
