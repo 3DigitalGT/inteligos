@@ -69,3 +69,15 @@ class StockMoveInherited(Model):
         return {
             'type': 'ir.actions.act_window_close'
         }
+
+    def _action_cancel(self):
+        """
+        Sobrescritura al método genérico para eiminar las series enlazadas al movimiento.
+        :return: valor genérico devuelto por Odoo.
+        """
+        result = super(StockMoveInherited, self)._action_cancel()
+        product_series = self.env['product.series'].search([('stock_move_id', '=', self.id)])
+
+        for series in product_series:
+            series.unlink()
+        return result

@@ -21,8 +21,9 @@
                         <field name="series_ids" nolabel="1">
                             <tree editable="top" create="0" delete="0" decoration-muted="its_done==True">
                                 <field name="its_done" invisible="1"/>
-                                <field name="name" force_save="1" attrs="{'readonly': [('its_done', '=', True)]}"/>
                                 <field name="number" force_save="1" string="Número"/>
+                                <field name="name" force_save="1" attrs="{'readonly': [('its_done', '=', True)]}"/>
+                                <field name="its_reused" force_save="1"/>
                             </tree>
                         </field>
                     </group>

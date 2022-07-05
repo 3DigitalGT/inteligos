@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from odoo.models import Model
+from odoo.api import constrains
 from odoo.fields import (Boolean, Many2one, Char, Integer, Datetime)
+from odoo.exceptions import ValidationError
 
 
 class ProductSeries(Model):
@@ -57,3 +59,17 @@ class ProductSeries(Model):
         store=True,
         string="Hecho"
     )
+    its_reused = Boolean(
+        default=False,
+        store=True,
+        string="Reutilizada"
+    )
+    user_id = Many2one(comodel_name='res.users',
+                       string='Usuario', copy=False,
+                       default=lambda self: self.env.user)
+
+    @constrains('name', 'its_done', 'its_reused')
+    def _check_unique_series_name(self):
+        for record in self:
+            if record.search_count([('name', '=', record.name), ('id', '!=', record.id)]) and not record.its_reused:
+                raise ValidationError('Las series deben ser únicas a menos que sea reutilizada por caso de garantía.')

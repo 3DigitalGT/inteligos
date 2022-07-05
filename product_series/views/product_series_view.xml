@@ -2,7 +2,7 @@
 <odoo>
 
     <record model="ir.ui.view" id="tree_view_product_series">
-        <field name="name">Herencia de vista tipo formulario para Series de inventario para Productos</field>
+        <field name="name">Vista tipo formulario para Series de inventario para Productos</field>
         <field name="model">product.series</field>
         <field name="arch" type="xml">
             <tree create="false">
@@ -10,6 +10,8 @@
                 <field name="stock_picking_id"/>
                 <field name="stock_move_id"/>
                 <field name="product_id"/>
+                <field name="product_id"/>
+                <field name="user_id"/>
             </tree>
         </field>
     </record>
