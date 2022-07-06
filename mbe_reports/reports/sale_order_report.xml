@@ -184,7 +184,7 @@
                                                 <span>Cuenta Ajena IVA</span>
                                             </td>
                                             <td class="text-right">
-                                                <!--                                                <span t-field="doc.logistic_employed_iva" class="text-right"/>-->
+                                                <span t-field="doc.logistic_employed_iva" class="text-right"/>
                                             </td>
                                         </tr>
                                         <tr style="">
@@ -192,7 +192,7 @@
                                                 <span>Cuenta Ajena DAI</span>
                                             </td>
                                             <td class="text-right">
-                                                <!--                                                <span t-field="doc.logistic_employed_dai" class="text-right"/>-->
+                                                <span t-field="doc.logistic_employed_dai" class="text-right"/>
                                             </td>
                                         </tr>
                                         <tr style="">
@@ -200,13 +200,13 @@
                                                 <span>Cuenta Ajena Otros</span>
                                             </td>
                                             <td class="text-right">
-                                                <!--                                                <span t-field="doc.logistic_employed_others" />-->
+                                                <span t-field="doc.logistic_employed_others" />
                                             </td>
                                         </tr>
                                         <tr class="border-black o_total">
                                             <td name="td_amount_total_label"><strong>Total a Cobrar</strong></td>
                                             <td name="td_amount_total" class="text-right">
-                                                <!--                                                <span t-field="doc.total_logistic"/>-->
+                                                <span t-field="doc.total_logistic"/>
                                             </td>
                                         </tr>
                                     </table>
