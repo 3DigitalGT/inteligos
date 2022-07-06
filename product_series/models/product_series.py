@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo.models import Model
-from odoo.api import constrains
+from odoo.api import (constrains, onchange)
 from odoo.fields import (Boolean, Many2one, Char, Integer, Datetime)
 from odoo.exceptions import ValidationError
 
@@ -68,8 +68,15 @@ class ProductSeries(Model):
                        string='Usuario', copy=False,
                        default=lambda self: self.env.user)
 
-    @constrains('name', 'its_done', 'its_reused')
+    @onchange('name')
+    def _onchange_series_name(self):
+        if self.exists() and self.search_count([('name', '=', self.name), ('id', '!=', self.id)]) \
+                and not self.its_reused:
+            raise ValidationError('Las series deben ser únicas a menos que sea reutilizada por caso de garantía.')
+
+    @constrains('name', 'its_reused')
     def _check_unique_series_name(self):
         for record in self:
-            if record.search_count([('name', '=', record.name), ('id', '!=', record.id)]) and not record.its_reused:
+            if record.exists() and record.search_count([('name', '=', record.name), ('id', '!=', record.id)]) \
+                    and not record.its_reused:
                 raise ValidationError('Las series deben ser únicas a menos que sea reutilizada por caso de garantía.')
