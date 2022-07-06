@@ -94,19 +94,19 @@ class InheritSaleOrderLogistic(Model):
                     })
         return self
 
-    @onchange('payment_method')
-    def onchange_payment_method(self):
-        """Sobreescritura del método para eliminar la línea del pedido
-            (si el método de pago no es tarjeta de crédito) que tiene
-            el producto configurado en la compañía para gastos administrativos.
-        """
-        super(InheritSaleOrderLogistic, self).onchange_payment_method()
-        logistic_admin_expenses_id = self.env.company.logistic_admin_expenses_id.id
-
-        if self.state == 'draft' and self.payment_method == 'tc' \
-                and logistic_admin_expenses_id in self.order_line.mapped('product_id').ids:
-            line = self.order_line.filtered(lambda l: l.product_id.id == logistic_admin_expenses_id)
-            line.unlink()
+    # @onchange('payment_method') # # TODO: Código en desuso debido a que no es necesario para el uso actual.
+    # def onchange_payment_method(self):
+    #     """Sobreescritura del método para eliminar la línea del pedido
+    #         (si el método de pago no es tarjeta de crédito) que tiene
+    #         el producto configurado en la compañía para gastos administrativos.
+    #     """
+    #     super(InheritSaleOrderLogistic, self).onchange_payment_method()
+    #     logistic_admin_expenses_id = self.env.company.logistic_admin_expenses_id.id
+    #
+    #     if self.state == 'draft' and self.payment_method == 'tc' \
+    #             and logistic_admin_expenses_id in self.order_line.mapped('product_id').ids:
+    #         line = self.order_line.filtered(lambda l: l.product_id.id == logistic_admin_expenses_id)
+    #         line.unlink()
 
     @onchange("package_ids")
     def update_packages(self):
@@ -173,9 +173,9 @@ class InheritSaleOrderLogistic(Model):
                                 'qty': float(sum([package.qty for package in self.package_ids if package.qty])),
                                 'product_id': self.env.company.logistic_clearance_id})
 
-        if self.payment_method == 'tc':
-            products_values.append({'package_id': False, 'qty': 1.00,
-                                    'product_id': self.env.company.logistic_admin_expenses_id})
+        # if self.payment_method == 'tc':  # # TODO: Código en desuso debido a que no es necesario para el uso actual.
+        #     products_values.append({'package_id': False, 'qty': 1.00,
+        #                             'product_id': self.env.company.logistic_admin_expenses_id})
 
         values_list = []
         SaleOrderLine = self.env["sale.order.line"]
