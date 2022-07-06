@@ -70,13 +70,12 @@ class ProductSeries(Model):
 
     @onchange('name')
     def _onchange_series_name(self):
-        if self.exists() and self.search_count([('name', '=', self.name), ('id', '!=', self.id)]) \
-                and not self.its_reused and self.name:
+        if self.exists() and self.search_count([('name', '=', self.name)]) > 1 and not self.its_reused and self.name:
             raise ValidationError('Las series deben ser únicas a menos que sea reutilizada por caso de garantía.')
 
     @constrains('name', 'its_reused')
     def _check_unique_series_name(self):
         for record in self:
-            if record.exists() and record.search_count([('name', '=', record.name), ('id', '!=', record.id)]) \
+            if record.exists() and record.search_count([('name', '=', record.name)]) > 1 \
                     and not record.its_reused and record.name:
                 raise ValidationError('Las series deben ser únicas a menos que sea reutilizada por caso de garantía.')
