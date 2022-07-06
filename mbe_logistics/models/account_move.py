@@ -620,7 +620,11 @@ class InheritSaleOrderLogistic(Model):
                             others = v
 
                         total = iva + dai + others
-                        employed_complement.agregar(instance_partner.vat, move.receipt_id.name,
+                        sequence = move.receipt_id._get_sequence()
+                        number = '%%0%sd' % sequence.padding % \
+                                 sequence._get_current_sequence().number_next_actual
+                        name = '%s%s' % (sequence.prefix or '', number)
+                        employed_complement.agregar(instance_partner.vat, name,
                                                     move.receipt_id.date,
                                                     k, self.truncate(iva / 0.12, 10), dai, iva, others, total)
                 certify_fel_dte.agregar_complemento(employed_complement)
