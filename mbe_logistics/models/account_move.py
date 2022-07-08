@@ -1,10 +1,4 @@
 # -*- coding: utf-8 -*-
-# TODO: MANTENERLO MIENTRAS SE HACEN LAS EVALUACIONES DE USO
-# import sys
-# sys.path.append('C:/Users/UsuarioDocuments/Odoo15/Custom_addons_Odoo15/main_account/addons_gen')
-#
-# for line in sys.path:
-#     print(line)
 
 from datetime import datetime
 from pytz import timezone, UTC
