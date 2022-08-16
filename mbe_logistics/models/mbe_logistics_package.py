@@ -314,7 +314,7 @@ class Package(Model):
             sale_order_id.logistic_employed_others -= self.custom_expenses
             sale_order_id.logistic_employed -= (self.iva + self.dai + self.custom_expenses)
             sale_order_id.total_cif -= self.value_gt
-            sale_order_id.oea = ", ".join([package.name + '(' + package.manifest_id.name + ')'
+            sale_order_id.oea = ", ".join([f'{package.name} ({package.manifest_id.name})'
                                            for package in sale_order_id.package_ids if package.id != self.id])
         else:
             raise ValidationError('Sólo puede quitar paquetes de un pedido si este está en estado Borrador')
