@@ -9,3 +9,6 @@
 [submodule "addons_whatsapp"]
 	path = addons_whatsapp
 	url = git@github.com:3DigitalGT/addons_whatsapp.git
+[submodule "addons_project"]
+	path = addons_project
+	url = git@github.com:3DigitalGT/addons_project.git
